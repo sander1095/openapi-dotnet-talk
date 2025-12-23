@@ -9,7 +9,12 @@ public static class WeatherEndpoints
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        app.MapGet("/weatherforecast", () =>
+        app.MapGet("/weatherforecast", GetWeatherForecast)
+            .WithName("GetWeatherForecast");
+
+        return app;
+
+        WeatherForecast[] GetWeatherForecast()
         {
             var forecast = Enumerable.Range(1, 5).Select(index =>
                 new WeatherForecast
@@ -21,10 +26,7 @@ public static class WeatherEndpoints
                 ))
                 .ToArray();
             return forecast;
-        })
-        .WithName("GetWeatherForecast");
-
-        return app;
+        }
     }
 }
 

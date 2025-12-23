@@ -1,0 +1,6 @@
+@YamlSupport_HostAddress = http://localhost:5187
+
+GET {{YamlSupport_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
