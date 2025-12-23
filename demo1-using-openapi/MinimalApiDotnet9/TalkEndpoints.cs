@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-
-using ApiModels;
+﻿using ApiModels;
 
 using Microsoft.AspNetCore.Http.HttpResults;
 
@@ -20,16 +17,25 @@ public static class TalkEndpoints
 
         api.MapGet("/", GetTalks).WithName("Talks_GetTalks");
         api.MapGet("/{id:int:min(1)}", GetTalk).WithName("Talks_GetTalk");
-        api.MapPost("/", CreateTalk).WithName("Talks_CreateTalk").WithSummary("Creates a talk");
+        api.MapPost("/", CreateTalk).WithName("Talks_CreateTalk");
 
         return app;
     }
 
+    /// <summary>
+    /// Gets a list of all talks
+    /// </summary>
+    /// <returns>A list of talks</returns>
     public static Ok<List<TalkModel>> GetTalks()
     {
         return TypedResults.Ok(SampleTalks.Talks);
     }
 
+    /// <summary>
+    /// Gets a specific talk by ID
+    /// </summary>
+    /// <param name="id">The ID of the talk to retrieve</param>
+    /// <returns>The talk if found, otherwise NotFound</returns>
     public static Results<Ok<TalkModel>, NotFound> GetTalk(int id)
     {
         var talk = SampleTalks.Talks.FirstOrDefault(x => x.Id == id);
@@ -39,7 +45,12 @@ public static class TalkEndpoints
             TypedResults.Ok(talk);
     }
 
-    public static Results<Ok<TalkModel>, ValidationProblem, Conflict> CreateTalk([Description("The requestbody for the talk")] CreateTalkModel requestBody)
+    /// <summary>
+    /// Creates a talk
+    /// </summary>
+    /// <param name="requestBody">The requestbody for the talk</param>
+    /// <returns>The created talk</returns>
+    public static Results<Ok<TalkModel>, ValidationProblem, Conflict> CreateTalk(CreateTalkModel requestBody)
     {
         // Note: This endpoint contains no request validation for brevity reasons, as Minimal API doesn't support this out of the box yet, unlike controllers!
         if (SampleTalks.Talks.Any(x => x.Title == requestBody.Title))
