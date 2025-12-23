@@ -4,7 +4,7 @@
   "steps": [
     {
       "file": "demo1-using-openapi/OpenApiInDotnet8/OpenApiInDotnet8.csproj",
-      "description": "In .NET 8, the default OpenAPI library was `Swashbuckle.AspNetCore`",
+      "description": "In .NET 8, the default OpenAPI library was `Swashbuckle.AspNetCore`. This project has been updated to .NET 10 but still uses Swashbuckle for backward compatibility demonstration.",
       "line": 13
     },
     {

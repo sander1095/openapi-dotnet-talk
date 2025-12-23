@@ -16,22 +16,20 @@ app.MapOpenApi();
 // Add Scalar UI for viewing the OpenAPI document
 app.MapScalarApiReference();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
 app.MapGet("/weatherforecast", GetWeatherForecast)
-    .WithName("GetWeatherForecast");
+    .WithName("GetWeatherForecast")
+    .WithSummary("Gets the weather forecast")
+    .WithDescription("Returns a collection of weather forecasts for the next 5 days");
 
 app.Run();
 
-/// <summary>
-/// Gets the weather forecast
-/// </summary>
-/// <returns>A collection of weather forecasts for the next 5 days</returns>
-WeatherForecast[] GetWeatherForecast()
+static WeatherForecast[] GetWeatherForecast()
 {
+    var summaries = new[]
+    {
+        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+    };
+    
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
