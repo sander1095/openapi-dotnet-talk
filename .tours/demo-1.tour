@@ -92,6 +92,11 @@
       }
     },
     {
+      "file": "demo1-using-openapi/OpenApiInDotnet8/Controllers/TalksController.cs",
+      "description": "Finally, I want to call some attention to setting response descriptions in .NET 8.\r\n\r\nLike I showed in the slides, I made this easier to do in .NET 10.\r\n\r\nYou can see a `response` tag here, which sets the code (`409`) with the response description.\r\n\r\nHowever, this `response` doesn't show up in autocomplete, and you now need to keep your XML in sync with the attribute",
+      "line": 41
+    },
+    {
       "file": "demo1-using-openapi/OpenApiInDotnet8/openapi.json",
       "selection": {
         "start": {
@@ -174,6 +179,11 @@
         }
       },
       "description": "Now that we understand how this worked in .NET 8, let's take a look at .NET 10!\r\n\r\nThis uses `Microsoft.AspNetCore.OpenApi` for creating the OpenAPI spec, and `Scalar` for rendering an UI based on the document. You can also still use Swashbuckle with SwaggerUI, but Scalar is newer and has cool features!"
+    },
+    {
+      "file": "demo1-using-openapi/ControllersDotnet10/Controllers/TalksController.cs",
+      "description": "The only thing changed in the controller is the `response` XML tag.\r\n\r\nInstead, you can now set the `Description` property on `ProducesResponseType`, `Produces` and `ProducesDefaultResponseType`.\r\n\r\nYou don't need to juggle your XML with your attribute, and you get intellisense for this.\r\n\r\nI highly recommend using this for all non-obvious responses, and errors!",
+      "line": 46
     },
     {
       "file": "demo1-using-openapi/ControllersDotnet10/Program.cs",

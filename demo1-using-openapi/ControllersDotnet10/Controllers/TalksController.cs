@@ -43,7 +43,7 @@ public class TalksController : ControllerBase
     [HttpPost(Name = "Talks_CreateTalk")]
     [ProducesResponseType<TalkModel>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    [ProducesResponseType(StatusCodes.Status409Conflict, Description = "Returned when a talk with the given title already exists")]
     [ProducesDefaultResponseType]
     public ActionResult<TalkModel> CreateTalk(CreateTalkModel requestBody)
     {
