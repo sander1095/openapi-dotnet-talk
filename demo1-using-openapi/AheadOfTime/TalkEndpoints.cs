@@ -17,7 +17,7 @@ public static class TalkEndpoints
 
         api.MapGet("/", GetTalks).WithName("Talks_GetTalks");
         api.MapGet("/{id:int:min(1)}", GetTalk).WithName("Talks_GetTalk");
-        api.MapPost("/", CreateTalk).WithName("Talks_CreateTalk").WithSummary("Creates a talk");
+        api.MapPost("/", CreateTalk).WithName("Talks_CreateTalk");
 
         return app;
     }
