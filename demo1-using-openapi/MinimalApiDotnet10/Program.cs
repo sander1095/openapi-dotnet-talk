@@ -6,10 +6,10 @@ builder.WebHost.UseUrls("http://localhost:5302");
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi(x =>
-    // TODO: Remove
-    x.OpenApiVersion = Microsoft.OpenApi.OpenApiSpecVersion.OpenApi3_0
-);
+builder.Services.AddOpenApi();
+
+builder.Services.AddValidation();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -184,10 +184,10 @@
         },
         "end": {
           "line": 15,
-          "character": 64
+          "character": 1
         }
       },
-      "description": "Adding OpenAPI in .NET 10 is still very easy!"
+      "description": "Adding OpenAPI in .NET 10 is still very easy! However, the default has changed from OpenAPI 3 to 3.1.1!"
     },
     {
       "file": "demo1-using-openapi/ControllersDotnet10/Controllers/TalksController.cs",
@@ -201,7 +201,7 @@
           "character": 121
         }
       },
-      "description": "TODO: UPDATE THIS... The TalksController is _almost_ the same as the .NET 8 variant.\r\n\r\nBecause .NET 9 does not support XML Comments, we will need to use `EndpointSummary` and `Description` on the parameter to set up the relevant info for OpenAPI."
+      "description": "The TalksController is _almost_ the same as the .NET 8 variant.\r\n"
     },
     {
       "file": "demo1-using-openapi/ControllersDotnet10/openapi.json",
@@ -215,7 +215,7 @@
           "character": 7
         }
       },
-      "description": "This is the OpenAPI file generated in .NET 10. It's very similar, so let's not nitpick the very small changes. Instead, let's look atsome relevant ones!\r\n\r\nHere you see that .NET 10 adds a property, which is `servers`. This is a list of servers this API runs on. For example, local, test and prod. In this case, it adds my localhost."
+      "description": "This is the OpenAPI file generated in .NET 10 with version 3.1.1 instead of 3.0.x. It's very similar, so let's not nitpick the very small changes. Instead, let's look atsome relevant ones!\r\n\r\nHere you see that .NET 10 adds a property, which is `servers`. This is a list of servers this API runs on. For example, local, test and prod. In this case, it adds my localhost."
     },
     {
       "file": "demo1-using-openapi/ControllersDotnet10/openapi.json",
