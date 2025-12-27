@@ -29,7 +29,7 @@
           "character": 96
         }
       },
-      "description": "You can specify different settings for where you'd like this document to be generated. For example, we can use `OpenApiDocumentsDirectory` to save the OpenAPI spec into the project directory instead of `bin/`. \r\n\r\nWe can also use `OpenApiGenerateDocumentsOptions` to specify the file name. Normally, it's the name of the project. However, here we change it to `openapi-spec`.\r\n\r\nThere's a few more settings available, which you can find in the docs."
+      "description": "You can specify different settings for where you'd like this document to be generated. For example, we can use `OpenApiDocumentsDirectory` to save the OpenAPI spec into the project directory instead of `obj/`. \r\n\r\nWe can also use `OpenApiGenerateDocumentsOptions` to specify the file name. Normally, it's the name of the project. However, here we change it to `openapi-spec`.\r\n\r\nThere's a few more settings available, which you can find in the docs."
     },
     {
       "file": "demo2-customizing-and-build-time-openapi/BuildTimeOpenApiDocumentGeneration/Program.cs",
@@ -54,15 +54,29 @@
       "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/Program.cs",
       "selection": {
         "start": {
+          "line": 31,
+          "character": 1
+        },
+        "end": {
+          "line": 34,
+          "character": 4
+        }
+      },
+      "description": "As discussed before, we can change the Json Number Handling to Strict to prevent numbers from being a int AND string"
+    },
+    {
+      "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/Program.cs",
+      "selection": {
+        "start": {
           "line": 10,
           "character": 1
         },
         "end": {
           "line": 13,
-          "character": 54
+          "character": 1
         }
       },
-      "description": "We might want to change the way OpenAPI files are generated. There's quite a lot of options available in the `AddOpenApi` overloads!\r\n\r\nWe're not going through all of them. Some more are covered in the docs. I want to focus on the transformers.\r\n\r\nFirst, let's look at the OpenAPI version. We can switch to OpenAPI 3 or OpenAPI 2."
+      "description": "We might want to change the way OpenAPI files are generated. There's quite a lot of options available in the `AddOpenApi` overloads!\r\n\r\nWe're not going through all of them. Some more are covered in the docs. I want to focus on the transformers.\r\n\r\nFirst, let's look at the OpenAPI version. We can switch to OpenAPI 3.0, 3.1 or 2."
     },
     {
       "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/Program.cs",
@@ -152,11 +166,11 @@
       "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/openapi.json",
       "selection": {
         "start": {
-          "line": 68,
+          "line": 70,
           "character": 1
         },
         "end": {
-          "line": 71,
+          "line": 73,
           "character": 15
         }
       },

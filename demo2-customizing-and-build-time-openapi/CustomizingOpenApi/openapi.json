@@ -1,85 +1,87 @@
 {
-    "openapi": "3.0.1",
-    "info": {
-      "title": "CustomizingOpenApi | v1",
-      "contact": {
-        "name": "Sander ten Brinke",
-        "url": "https://stenbrinke.nl",
-        "email": "s.tenbrinke2@gmail.com"
-      },
-      "version": "1.0.0"
+  "openapi": "3.1.1",
+  "info": {
+    "title": "CustomizingOpenApi | v1",
+    "contact": {
+      "name": "Sander ten Brinke",
+      "url": "https://stenbrinke.nl",
+      "email": "s.tenbrinke2@gmail.com"
     },
-    "servers": [
-      {
-        "url": "http://localhost:5305"
-      }
-    ],
-    "paths": {
-      "/weatherforecast": {
-        "get": {
-          "tags": [
-            "CustomizingOpenApi"
-          ],
-          "operationId": "GetWeatherForecast",
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/WeatherForecast"
-                    }
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5305/"
+    }
+  ],
+  "paths": {
+    "/weatherforecast": {
+      "get": {
+        "tags": [
+          "CustomizingOpenApi"
+        ],
+        "operationId": "GetWeatherForecast",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
                   }
                 }
               }
-            },
-            "500": {
-              "description": "Internal server error"
             }
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
-    },
-    "components": {
-      "schemas": {
-        "WeatherForecast": {
-          "required": [
-            "date",
-            "temperatureC",
-            "summary",
-            "example"
-          ],
-          "type": "object",
-          "properties": {
-            "date": {
-              "type": "string",
-              "format": "date"
-            },
-            "temperatureC": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "summary": {
-              "type": "string",
-              "nullable": true
-            },
-            "example": {
-              "type": "number",
-              "format": "decimal"
-            },
-            "temperatureF": {
-              "type": "integer",
-              "format": "int32"
-            }
+    }
+  },
+  "components": {
+    "schemas": {
+      "WeatherForecast": {
+        "required": [
+          "date",
+          "temperatureC",
+          "summary",
+          "example"
+        ],
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "temperatureC": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "summary": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "example": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "temperatureF": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       }
-    },
-    "tags": [
-      {
-        "name": "CustomizingOpenApi"
-      }
-    ]
-  }
+    }
+  },
+  "tags": [
+    {
+      "name": "CustomizingOpenApi"
+    }
+  ]
+}
