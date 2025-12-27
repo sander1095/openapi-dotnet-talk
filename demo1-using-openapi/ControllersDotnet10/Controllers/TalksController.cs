@@ -4,7 +4,7 @@ using ApiModels;
 
 using Microsoft.AspNetCore.Mvc;
 
-namespace ControllersDotnet9.Controllers;
+namespace ControllersDotnet10.Controllers;
 
 [ApiController]
 [Route("api/talks")]

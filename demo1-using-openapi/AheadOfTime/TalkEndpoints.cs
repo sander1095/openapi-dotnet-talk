@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 namespace AheadOfTime;
 
 /// <remarks>
-/// This example doesn't have feature parity with the .NET 9 controllers project.
+/// This example doesn't have feature parity with the .NET 10 controllers project.
 /// It misses things like OpenAPI's "default" and returning a Problem Details with 404/409.
 /// This would need an OpenAPI transformer and more complex code, respectively, which doesn't fit in this small demo.
 /// </remarks>

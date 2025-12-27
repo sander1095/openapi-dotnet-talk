@@ -79,7 +79,7 @@
     },
     {
       "file": "demo1-using-openapi/OpenApiInDotnet8/Controllers/TalksController.cs",
-      "description": "Finally, the endpoint which creates a talk. You can see XML comments, which helps decorate the summary, parameter and description for OpenAPI. This is not supported in .NET 9, but will be in .NET 10.\r\n\r\nThis endpoint is a POST, and it can do multiple things.\r\n\r\nIt can return 200 OK with the created talk. \r\nIt can return 400 Bad Request when validation fails. \r\nIt can also return 409 Conflict if the talk title already exists.\r\n\r\nFinally, we're indicating that any unknown status codes should be treated as Problem Details again.",
+      "description": "Finally, the endpoint which creates a talk. You can see XML comments, which helps decorate the summary, parameter and description for OpenAPI.\r\n\r\nThis endpoint is a POST, and it can do multiple things.\r\n\r\nIt can return 200 OK with the created talk. \r\nIt can return 400 Bad Request when validation fails. \r\nIt can also return 409 Conflict if the talk title already exists.\r\n\r\nFinally, we're indicating that any unknown status codes should be treated as Problem Details again.",
       "selection": {
         "start": {
           "line": 36,
@@ -162,7 +162,7 @@
       "description": "And this is the talk model, which looks very similar to the CreateTalkModel, so no need to cover this right now.\r\n\r\nYiu can see the required properties, and then each property being defined with a type, description and nullability.\r\n\r\nFun fact: You can see Swashbuckle making a small \"mistake\". It sets `Title` up as nullable, even though we used C#'s `required` keyword AND marked it as `string`, which is non-nullable. I believe NSwag does do this correctly 😉.\r\n\r\n**DO:**\r\n\r\n- Go to http://localhost:5300/swagger to show off SwaggerUI quickly"
     },
     {
-      "file": "demo1-using-openapi/ControllersDotnet9/ControllersDotnet9.csproj",
+      "file": "demo1-using-openapi/ControllersDotnet10/ControllersDotnet10.csproj",
       "selection": {
         "start": {
           "line": 10,
@@ -173,10 +173,10 @@
           "character": 15
         }
       },
-      "description": "Now that we understand how this worked in .NET 9, let's take a look at .NET 9!\r\n\r\nThis uses `Microsoft.AspNetCore.OpenApi` for creating the OpenAPI spec, and `Scalar` for rendering an UI based on the document. You can also still use Swashbuckle with SwaggerUI, but Scalar is newer and has cool features!"
+      "description": "Now that we understand how this worked in .NET 8, let's take a look at .NET 10!\r\n\r\nThis uses `Microsoft.AspNetCore.OpenApi` for creating the OpenAPI spec, and `Scalar` for rendering an UI based on the document. You can also still use Swashbuckle with SwaggerUI, but Scalar is newer and has cool features!"
     },
     {
-      "file": "demo1-using-openapi/ControllersDotnet9/Program.cs",
+      "file": "demo1-using-openapi/ControllersDotnet10/Program.cs",
       "selection": {
         "start": {
           "line": 8,
@@ -187,10 +187,10 @@
           "character": 64
         }
       },
-      "description": "Adding OpenAPI in .NET 9 is still very easy!"
+      "description": "Adding OpenAPI in .NET 10 is still very easy!"
     },
     {
-      "file": "demo1-using-openapi/ControllersDotnet9/Controllers/TalksController.cs",
+      "file": "demo1-using-openapi/ControllersDotnet10/Controllers/TalksController.cs",
       "selection": {
         "start": {
           "line": 39,
@@ -201,10 +201,10 @@
           "character": 121
         }
       },
-      "description": "The TalksController is _almost_ the same as the .NET 8 variant.\r\n\r\nBEcause .NET 9 does not support XML Comments, we will need to use `EndpointSummary` and `Description` on the parameter to set up the relevant info for OpenAPI."
+      "description": "TODO: UPDATE THIS... The TalksController is _almost_ the same as the .NET 8 variant.\r\n\r\nBecause .NET 9 does not support XML Comments, we will need to use `EndpointSummary` and `Description` on the parameter to set up the relevant info for OpenAPI."
     },
     {
-      "file": "demo1-using-openapi/ControllersDotnet9/openapi.json",
+      "file": "demo1-using-openapi/ControllersDotnet10/openapi.json",
       "selection": {
         "start": {
           "line": 7,
@@ -215,10 +215,10 @@
           "character": 7
         }
       },
-      "description": "This is the OpenAPI file generated in .NET 9. It's very similar, so let's not nitpick the very small changes. Instead, let's look atsome relevant ones!\r\n\r\nHere you see that .NET 9 adds a property, which is `servers`. This is a list of servers this API runs on. For example, local, test and prod. In this case, it adds my localhost."
+      "description": "This is the OpenAPI file generated in .NET 10. It's very similar, so let's not nitpick the very small changes. Instead, let's look atsome relevant ones!\r\n\r\nHere you see that .NET 10 adds a property, which is `servers`. This is a list of servers this API runs on. For example, local, test and prod. In this case, it adds my localhost."
     },
     {
-      "file": "demo1-using-openapi/ControllersDotnet9/openapi.json",
+      "file": "demo1-using-openapi/ControllersDotnet10/openapi.json",
       "selection": {
         "start": {
           "line": 298,
@@ -232,7 +232,7 @@
       "description": "And this is the `TalkModel`. You can see that this does not make any mistakes with nullability."
     },
     {
-      "file": "demo1-using-openapi/ControllersDotnet9/Program.cs",
+      "file": "demo1-using-openapi/ControllersDotnet10/Program.cs",
       "description": "Let's go and run this demo and take a quick look at Scalar!\r\n\r\n**DO**\r\n\r\n- Visit http://localhost:5301/openapi/v1.json for the OpenAPI endpoint.\r\n  - This is different compared to SwaggerUI, which was `swagger/v1/swagger.json`\r\n- Visit http://localhost:5301/scalar and show off the UI, API client code and test a request.",
       "line": 24,
       "selection": {
@@ -247,7 +247,7 @@
       }
     },
     {
-      "file": "demo1-using-openapi/MinimalApiDotnet9/Program.cs",
+      "file": "demo1-using-openapi/MinimalApiDotnet10/Program.cs",
       "selection": {
         "start": {
           "line": 8,
@@ -261,7 +261,7 @@
       "description": "Now let's look at Minimal API endpoints with OpenAPI support!\r\n\r\nThis is the Program.cs file. I have built endpoints that are very similar to the controllers I showed before. In this case, we're calling `MapTalkEndpoints`."
     },
     {
-      "file": "demo1-using-openapi/MinimalApiDotnet9/TalkEndpoints.cs",
+      "file": "demo1-using-openapi/MinimalApiDotnet10/TalkEndpoints.cs",
       "selection": {
         "start": {
           "line": 17,
@@ -275,7 +275,7 @@
       "description": "We're setting up our endpoints and methods that will execute the request here.\r\n\r\n- `WithName` sets the operationId.\r\n- `WithSummary` sets the summary."
     },
     {
-      "file": "demo1-using-openapi/MinimalApiDotnet9/TalkEndpoints.cs",
+      "file": "demo1-using-openapi/MinimalApiDotnet10/TalkEndpoints.cs",
       "selection": {
         "start": {
           "line": 28,
@@ -289,7 +289,7 @@
       "description": "This method uses `TypedResults` combined with the `Ok<List<TalkModel>>` to provide method metadata for OpenAPI so it understands what is being returned.\r\n\r\nYou CAN also use other approaches like `ProducesResponseType` and extension methods. We'll talk more about this at the end of the talk. This is all about preference, and for this demo, this requires the least code and works well enough!"
     },
     {
-      "file": "demo1-using-openapi/MinimalApiDotnet9/TalkEndpoints.cs",
+      "file": "demo1-using-openapi/MinimalApiDotnet10/TalkEndpoints.cs",
       "selection": {
         "start": {
           "line": 33,

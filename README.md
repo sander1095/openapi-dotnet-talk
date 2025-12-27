@@ -7,8 +7,8 @@ Run `dotnet publish -r win-x64 /p:PublishSingleFile=true /p:IncludeNativeLibrari
 | Demo                   | URL                    |
 | ---------------------- | ---------------------- |
 | .NET 8                 | http://localhost:5300  |
-| .NET 9 (Controllers)   | http://localhost:5301  |
-| .NET 9 (Minimal API)   | http://localhost:5302  |
+| .NET 10 (Controllers)   | http://localhost:5301  |
+| .NET 10 (Minimal API)   | http://localhost:5302  |
 | AOT                    | http://localhost:5303  |
 | ---------------------- | ---------------------- |
 | Build-Time Generation  | http://localhost:5304  |

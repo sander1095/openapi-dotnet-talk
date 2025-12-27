@@ -2,7 +2,6 @@
 using CustomizingOpenApi;
 using Microsoft.AspNetCore.OpenApi;
 using Microsoft.OpenApi;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseUrls("http://localhost:5305");
@@ -10,6 +9,7 @@ builder.WebHost.UseUrls("http://localhost:5305");
 builder.Services.AddOpenApi(x =>
 {
     // Change the OpenAPI version..
+    // TODO: Change to 3.1
     x.OpenApiVersion = OpenApiSpecVersion.OpenApi3_0;
 
     x.AddDocumentTransformer((document, context, cancellationToken) =>
@@ -42,7 +42,7 @@ public class OpenApiInternalServerErrorOperationTransformer : IOpenApiOperationT
 {
     public Task TransformAsync(OpenApiOperation operation, OpenApiOperationTransformerContext context, CancellationToken cancellationToken)
     {
-        operation.Responses.Add("500", new OpenApiResponse { Description = "Internal server error" });
+        operation.Responses?.Add("500", new OpenApiResponse { Description = "Internal server error" });
         return Task.CompletedTask;
     }
 }
