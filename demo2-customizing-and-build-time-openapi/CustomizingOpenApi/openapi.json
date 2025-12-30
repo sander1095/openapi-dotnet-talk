@@ -40,6 +40,30 @@
           }
         }
       }
+    },
+    "/old-endpoint": {
+      "get": {
+        "tags": [
+          "CustomizingOpenApi"
+        ],
+        "operationId": "old-endpoint",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "deprecated": true
+      }
     }
   },
   "components": {

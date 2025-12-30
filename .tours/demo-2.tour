@@ -68,7 +68,7 @@
       "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/Program.cs",
       "selection": {
         "start": {
-          "line": 10,
+          "line": 11,
           "character": 1
         },
         "end": {
@@ -82,11 +82,11 @@
       "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/Program.cs",
       "selection": {
         "start": {
-          "line": 15,
+          "line": 14,
           "character": 4
         },
         "end": {
-          "line": 25,
+          "line": 24,
           "character": 8
         }
       },
@@ -110,11 +110,11 @@
       "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/Program.cs",
       "selection": {
         "start": {
-          "line": 41,
+          "line": 45,
           "character": 1
         },
         "end": {
-          "line": 48,
+          "line": 52,
           "character": 2
         }
       },
@@ -124,15 +124,30 @@
       "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/Program.cs",
       "selection": {
         "start": {
-          "line": 50,
+          "line": 54,
           "character": 1
         },
         "end": {
-          "line": 61,
+          "line": 65,
           "character": 1
         }
       },
-      "description": "Finally, we can transform schemas. A schema is a model.\r\n\r\nNormally, if the Json Type Info would hold a decimal, OpenAPI would map it to a double. It does this because there is no \"official\" better format. \r\n\r\nThis transformer changes the `format` to `decimal`, instead. This might help OpenAPI tooling like API client generators to generate C# decimals."
+      "description": "And then there's the schema transformer. A schema is a model.\r\n\r\nNormally, if the Json Type Info would hold a decimal, OpenAPI would map it to a double. It does this because there is no \"official\" better format. \r\n\r\nThis transformer changes the `format` to `decimal`, instead. This might help OpenAPI tooling like API client generators to generate C# decimals."
+    },
+    {
+      "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/WeatherEndpoints.cs",
+      "selection": {
+        "start": {
+          "line": 27,
+          "character": 9
+        },
+        "end": {
+          "line": 34,
+          "character": 8
+        }
+      },
+      "description": "And here you can see an endpoint specific operation transformer. Useful for changing OpenAPI properties for a specific endpoint, or to set specific OpenAPI properties that can't be set with normal code",
+      "line": 27
     },
     {
       "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/openapi.json",
@@ -164,13 +179,18 @@
     },
     {
       "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/openapi.json",
+      "description": "Here you can see the result of the endpoint specific operation transformer, marking the endpoint as deprecated",
+      "line": 65
+    },
+    {
+      "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/openapi.json",
       "selection": {
         "start": {
-          "line": 70,
+          "line": 84,
           "character": 1
         },
         "end": {
-          "line": 73,
+          "line": 87,
           "character": 15
         }
       },
