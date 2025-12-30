@@ -2,15 +2,14 @@
 using CustomizingOpenApi;
 using Microsoft.AspNetCore.OpenApi;
 using Microsoft.OpenApi;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseUrls("http://localhost:5305");
 
 builder.Services.AddOpenApi(x =>
 {
-    // Change the OpenAPI version..
-    x.OpenApiVersion = OpenApiSpecVersion.OpenApi3_0;
+    // You can change the OpenAPI version if you want.
+    x.OpenApiVersion = OpenApiSpecVersion.OpenApi3_1;
 
     x.AddDocumentTransformer((document, context, cancellationToken) =>
     {
@@ -29,6 +28,11 @@ builder.Services.AddOpenApi(x =>
     x.AddSchemaTransformer(new OpenApiDoubleToDecimalSchemaTransformer());
 });
 
+// Let's change this to strict to demonstrate the schema transformer
+builder.Services.ConfigureHttpJsonOptions(x =>
+    x.SerializerOptions.NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.Strict
+);
+
 var app = builder.Build();
 
 app.MapOpenApi();
@@ -42,7 +46,7 @@ public class OpenApiInternalServerErrorOperationTransformer : IOpenApiOperationT
 {
     public Task TransformAsync(OpenApiOperation operation, OpenApiOperationTransformerContext context, CancellationToken cancellationToken)
     {
-        operation.Responses.Add("500", new OpenApiResponse { Description = "Internal server error" });
+        operation.Responses?.Add("500", new OpenApiResponse { Description = "Internal server error" });
         return Task.CompletedTask;
     }
 }

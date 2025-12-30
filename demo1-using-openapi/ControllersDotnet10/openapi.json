@@ -1,9 +1,14 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.1.1",
   "info": {
-    "title": "OpenApiInDotnet8",
-    "version": "1.0"
+    "title": "ControllersDotnet10 | v1",
+    "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "http://localhost:5301/"
+    }
+  ],
   "paths": {
     "/api/talks": {
       "get": {
@@ -42,7 +47,7 @@
             }
           },
           "default": {
-            "description": "Error",
+            "description": "",
             "content": {
               "text/plain": {
                 "schema": {
@@ -87,7 +92,8 @@
                 "$ref": "#/components/schemas/CreateTalkModel"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -151,7 +157,7 @@
             }
           },
           "default": {
-            "description": "Error",
+            "description": "",
             "content": {
               "text/plain": {
                 "schema": {
@@ -186,6 +192,7 @@
             "required": true,
             "schema": {
               "minimum": 1,
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
               "type": "integer",
               "format": "int32"
             }
@@ -240,90 +247,114 @@
     "schemas": {
       "CreateTalkModel": {
         "required": [
+          "title",
           "lengthInMinutes",
-          "roomName",
-          "title"
+          "roomName"
         ],
         "type": "object",
         "properties": {
           "title": {
             "maxLength": 100,
             "minLength": 1,
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "lengthInMinutes": {
             "maximum": 640,
             "minimum": 1,
-            "type": "integer",
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
             "format": "int32"
           },
           "roomName": {
             "type": "string",
-            "nullable": true
+            "description": "The name of the room where the talk will take place."
           }
-        },
-        "additionalProperties": false
+        }
       },
       "ProblemDetails": {
         "type": "object",
         "properties": {
           "type": {
-            "type": "string",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ]
           },
           "title": {
-            "type": "string",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ]
           },
           "status": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
           },
           "detail": {
-            "type": "string",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ]
           },
           "instance": {
-            "type": "string",
-            "nullable": true
+            "type": [
+              "null",
+              "string"
+            ]
           }
-        },
-        "additionalProperties": { }
+        }
       },
       "TalkModel": {
         "required": [
           "id",
+          "title",
           "lengthInMinutes",
-          "roomName",
-          "title"
+          "roomName"
         ],
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
             "format": "int32"
           },
           "title": {
             "maxLength": 500,
             "minLength": 1,
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "lengthInMinutes": {
             "maximum": 640,
             "minimum": 1,
-            "type": "integer",
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
             "format": "int32"
           },
           "roomName": {
             "type": "string",
-            "nullable": true
+            "description": "The name of the room where the talk will take place."
           }
-        },
-        "additionalProperties": false
+        }
       }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "Talks"
+    }
+  ]
 }

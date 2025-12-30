@@ -29,7 +29,7 @@
           "character": 1
         },
         "end": {
-          "line": 19,
+          "line": 21,
           "character": 2
         }
       },
@@ -43,7 +43,7 @@
           "character": 1
         },
         "end": {
-          "line": 15,
+          "line": 17,
           "character": 2
         }
       },
@@ -79,7 +79,7 @@
     },
     {
       "file": "demo1-using-openapi/OpenApiInDotnet8/Controllers/TalksController.cs",
-      "description": "Finally, the endpoint which creates a talk. You can see XML comments, which helps decorate the summary, parameter and description for OpenAPI. This is not supported in .NET 9, but will be in .NET 10.\r\n\r\nThis endpoint is a POST, and it can do multiple things.\r\n\r\nIt can return 200 OK with the created talk. \r\nIt can return 400 Bad Request when validation fails. \r\nIt can also return 409 Conflict if the talk title already exists.\r\n\r\nFinally, we're indicating that any unknown status codes should be treated as Problem Details again.",
+      "description": "Finally, the endpoint which creates a talk. You can see XML comments, which helps decorate the summary, parameter and description for OpenAPI.\r\n\r\nThis endpoint is a POST, and it can do multiple things.\r\n\r\nIt can return 200 OK with the created talk. \r\nIt can return 400 Bad Request when validation fails. \r\nIt can also return 409 Conflict if the talk title already exists.\r\n\r\nFinally, we're indicating that any unknown status codes should be treated as Problem Details again.",
       "selection": {
         "start": {
           "line": 36,
@@ -90,6 +90,11 @@
           "character": 5
         }
       }
+    },
+    {
+      "file": "demo1-using-openapi/OpenApiInDotnet8/Controllers/TalksController.cs",
+      "description": "Finally, I want to call some attention to setting response descriptions in .NET 8.\r\n\r\nLike I showed in the slides, I made this easier to do in .NET 10.\r\n\r\nYou can see a `response` tag here, which sets the code (`409`) with the response description.\r\n\r\nHowever, this `response` doesn't show up in autocomplete, and you now need to keep your XML in sync with the attribute",
+      "line": 41
     },
     {
       "file": "demo1-using-openapi/OpenApiInDotnet8/openapi.json",
@@ -127,8 +132,8 @@
           "character": 7
         },
         "end": {
-          "line": 71,
-          "character": 57
+          "line": 74,
+          "character": 1
         }
       },
       "description": "Here we see the Summary and description from the XML comments"
@@ -137,11 +142,11 @@
       "file": "demo1-using-openapi/OpenApiInDotnet8/openapi.json",
       "selection": {
         "start": {
-          "line": 269,
+          "line": 268,
           "character": 1
         },
         "end": {
-          "line": 295,
+          "line": 294,
           "character": 35
         }
       },
@@ -151,32 +156,37 @@
       "file": "demo1-using-openapi/OpenApiInDotnet8/openapi.json",
       "selection": {
         "start": {
-          "line": 296,
+          "line": 295,
           "character": 7
         },
         "end": {
-          "line": 328,
+          "line": 327,
           "character": 8
         }
       },
       "description": "And this is the talk model, which looks very similar to the CreateTalkModel, so no need to cover this right now.\r\n\r\nYiu can see the required properties, and then each property being defined with a type, description and nullability.\r\n\r\nFun fact: You can see Swashbuckle making a small \"mistake\". It sets `Title` up as nullable, even though we used C#'s `required` keyword AND marked it as `string`, which is non-nullable. I believe NSwag does do this correctly 😉.\r\n\r\n**DO:**\r\n\r\n- Go to http://localhost:5300/swagger to show off SwaggerUI quickly"
     },
     {
-      "file": "demo1-using-openapi/ControllersDotnet9/ControllersDotnet9.csproj",
+      "file": "demo1-using-openapi/ControllersDotnet10/ControllersDotnet10.csproj",
       "selection": {
         "start": {
-          "line": 10,
+          "line": 12,
           "character": 1
         },
         "end": {
-          "line": 13,
+          "line": 15,
           "character": 15
         }
       },
-      "description": "Now that we understand how this worked in .NET 9, let's take a look at .NET 9!\r\n\r\nThis uses `Microsoft.AspNetCore.OpenApi` for creating the OpenAPI spec, and `Scalar` for rendering an UI based on the document. You can also still use Swashbuckle with SwaggerUI, but Scalar is newer and has cool features!"
+      "description": "Now that we understand how this worked in .NET 8, let's take a look at .NET 10!\r\n\r\nThis uses `Microsoft.AspNetCore.OpenApi` for creating the OpenAPI spec, and `Scalar` for rendering an UI based on the document. You can also still use Swashbuckle with SwaggerUI, but Scalar is newer and has cool features!"
     },
     {
-      "file": "demo1-using-openapi/ControllersDotnet9/Program.cs",
+      "file": "demo1-using-openapi/ControllersDotnet10/Controllers/TalksController.cs",
+      "description": "The only thing changed in the controller is the `response` XML tag.\r\n\r\nInstead, you can now set the `Description` property on `ProducesResponseType`, `Produces` and `ProducesDefaultResponseType`.\r\n\r\nYou don't need to juggle your XML with your attribute, and you get intellisense for this.\r\n\r\nI highly recommend using this for all non-obvious responses, and errors!",
+      "line": 46
+    },
+    {
+      "file": "demo1-using-openapi/ControllersDotnet10/Program.cs",
       "selection": {
         "start": {
           "line": 8,
@@ -184,27 +194,13 @@
         },
         "end": {
           "line": 15,
-          "character": 64
-        }
-      },
-      "description": "Adding OpenAPI in .NET 9 is still very easy!"
-    },
-    {
-      "file": "demo1-using-openapi/ControllersDotnet9/Controllers/TalksController.cs",
-      "selection": {
-        "start": {
-          "line": 39,
           "character": 1
-        },
-        "end": {
-          "line": 45,
-          "character": 121
         }
       },
-      "description": "The TalksController is _almost_ the same as the .NET 8 variant.\r\n\r\nBEcause .NET 9 does not support XML Comments, we will need to use `EndpointSummary` and `Description` on the parameter to set up the relevant info for OpenAPI."
+      "description": "Adding OpenAPI in .NET 10 is still very easy! However, the default has changed from OpenAPI 3 to 3.1.1!"
     },
     {
-      "file": "demo1-using-openapi/ControllersDotnet9/openapi.json",
+      "file": "demo1-using-openapi/ControllersDotnet10/openapi.json",
       "selection": {
         "start": {
           "line": 7,
@@ -215,24 +211,38 @@
           "character": 7
         }
       },
-      "description": "This is the OpenAPI file generated in .NET 9. It's very similar, so let's not nitpick the very small changes. Instead, let's look atsome relevant ones!\r\n\r\nHere you see that .NET 9 adds a property, which is `servers`. This is a list of servers this API runs on. For example, local, test and prod. In this case, it adds my localhost."
+      "description": "This is the OpenAPI file generated in .NET 10 with version 3.1.1 instead of 3.0.x. It's very similar, so let's not nitpick the very small changes. Instead, let's look atsome relevant ones!\r\n\r\nHere you see that .NET 10 adds a property, which is `servers`. This is a list of servers this API runs on. For example, local, test and prod. In this case, it adds my localhost."
     },
     {
-      "file": "demo1-using-openapi/ControllersDotnet9/openapi.json",
+      "file": "demo1-using-openapi/ControllersDotnet10/openapi.json",
       "selection": {
         "start": {
-          "line": 298,
+          "line": 315,
           "character": 1
         },
         "end": {
-          "line": 327,
+          "line": 352,
           "character": 10
         }
       },
       "description": "And this is the `TalkModel`. You can see that this does not make any mistakes with nullability."
     },
     {
-      "file": "demo1-using-openapi/ControllersDotnet9/Program.cs",
+      "file": "demo1-using-openapi/ControllersDotnet10/openapi.json",
+      "selection": {
+        "start": {
+          "line": 324,
+          "character": 11
+        },
+        "end": {
+          "line": 331,
+          "character": 13
+        }
+      },
+      "description": "One difference I noticed is that the `int` parameters have changed from a simple `integer` with a `int32` format to this hybrid string/integer format with a regex...\r\n\r\nThe reason?\r\n\r\nIn ASP.NET Core, reading numbers from JSON is set to `JsonSerializerOptions.NumberHandling.AllowReadingFromString`, which means that our server would allow both strings and int, so this is done.\r\n\r\nYou can change that to `Strict` if you want to return back to Integer"
+    },
+    {
+      "file": "demo1-using-openapi/ControllersDotnet10/Program.cs",
       "description": "Let's go and run this demo and take a quick look at Scalar!\r\n\r\n**DO**\r\n\r\n- Visit http://localhost:5301/openapi/v1.json for the OpenAPI endpoint.\r\n  - This is different compared to SwaggerUI, which was `swagger/v1/swagger.json`\r\n- Visit http://localhost:5301/scalar and show off the UI, API client code and test a request.",
       "line": 24,
       "selection": {
@@ -247,7 +257,7 @@
       }
     },
     {
-      "file": "demo1-using-openapi/MinimalApiDotnet9/Program.cs",
+      "file": "demo1-using-openapi/MinimalApiDotnet10/Program.cs",
       "selection": {
         "start": {
           "line": 8,
@@ -261,46 +271,51 @@
       "description": "Now let's look at Minimal API endpoints with OpenAPI support!\r\n\r\nThis is the Program.cs file. I have built endpoints that are very similar to the controllers I showed before. In this case, we're calling `MapTalkEndpoints`."
     },
     {
-      "file": "demo1-using-openapi/MinimalApiDotnet9/TalkEndpoints.cs",
+      "file": "demo1-using-openapi/MinimalApiDotnet10/TalkEndpoints.cs",
       "selection": {
         "start": {
-          "line": 17,
+          "line": 14,
           "character": 1
         },
         "end": {
-          "line": 26,
+          "line": 23,
           "character": 6
         }
       },
-      "description": "We're setting up our endpoints and methods that will execute the request here.\r\n\r\n- `WithName` sets the operationId.\r\n- `WithSummary` sets the summary."
+      "description": "We're setting up our endpoints and methods that will execute the request here.\r\n\r\nThe actual functions are seperate, so we can use XML comments to annotate"
     },
     {
-      "file": "demo1-using-openapi/MinimalApiDotnet9/TalkEndpoints.cs",
+      "file": "demo1-using-openapi/MinimalApiDotnet10/TalkEndpoints.cs",
       "selection": {
         "start": {
-          "line": 28,
+          "line": 25,
           "character": 1
         },
         "end": {
-          "line": 31,
+          "line": 28,
           "character": 6
         }
       },
       "description": "This method uses `TypedResults` combined with the `Ok<List<TalkModel>>` to provide method metadata for OpenAPI so it understands what is being returned.\r\n\r\nYou CAN also use other approaches like `ProducesResponseType` and extension methods. We'll talk more about this at the end of the talk. This is all about preference, and for this demo, this requires the least code and works well enough!"
     },
     {
-      "file": "demo1-using-openapi/MinimalApiDotnet9/TalkEndpoints.cs",
+      "file": "demo1-using-openapi/MinimalApiDotnet10/TalkEndpoints.cs",
       "selection": {
         "start": {
-          "line": 33,
+          "line": 30,
           "character": 1
         },
         "end": {
-          "line": 40,
+          "line": 37,
           "character": 6
         }
       },
-      "description": "This endpoint returns multiple statuses. To deal with this, we use `Results`, which is kind of a union type, to indicate that this either returns an `OK` with a `TalkModel` or a `NotFound`.\r\n\r\nThe create talk endpoint is very similar, so I'll skip that one for now to save time."
+      "description": "This endpoint returns multiple statuses. To deal with this, we use `Results`, which is kind of a union type, to indicate that this either returns an `OK` with a `TalkModel` or a `NotFound`."
+    },
+    {
+      "file": "demo1-using-openapi/MinimalApiDotnet10/TalkEndpoints.cs",
+      "description": "Finally, we can use several approaches for setting the response descriptions:\r\n\r\n- Use the `response` XML Tag like we do here.\r\n- Use `[ProducesResponseType(409, Description = \"DESC_HERE\")]`\r\n- Use an endpoint specific operation transformer in `MapTalkEndpoints`.\r\n\r\n```csharp\r\n.AddOpenApiOperationTransformer((operation, context, cancellationToken) => \r\n{ \r\n    operation.Responses[\"409\"].Description = \"Talk with this title already exists\"; \r\n    return Task.CompletedTask;\r\n})\r\n```\r\n\r\nI'm not a really big fan of all approaches, though...\r\n\r\n- XML comments do not give any auto-complete\r\n- With Controllers, the 2nd option (`ProducesResponseType`) lives right next to the code, and can declare both the possible types, statuses and response descriptions. Here, you can use the attribute, but you'll have to keep the response type and TypedResults in sync.\r\n- Endpoint specific transformers are again decoupled from the code if you write it like this.",
+      "line": 44
     },
     {
       "file": "demo1-using-openapi/AheadOfTime/AheadOfTime.csproj",

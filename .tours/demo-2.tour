@@ -29,7 +29,7 @@
           "character": 96
         }
       },
-      "description": "You can specify different settings for where you'd like this document to be generated. For example, we can use `OpenApiDocumentsDirectory` to save the OpenAPI spec into the project directory instead of `bin/`. \r\n\r\nWe can also use `OpenApiGenerateDocumentsOptions` to specify the file name. Normally, it's the name of the project. However, here we change it to `openapi-spec`.\r\n\r\nThere's a few more settings available, which you can find in the docs."
+      "description": "You can specify different settings for where you'd like this document to be generated. For example, we can use `OpenApiDocumentsDirectory` to save the OpenAPI spec into the project directory instead of `obj/`. \r\n\r\nWe can also use `OpenApiGenerateDocumentsOptions` to specify the file name. Normally, it's the name of the project. However, here we change it to `openapi-spec`.\r\n\r\nThere's a few more settings available, which you can find in the docs."
     },
     {
       "file": "demo2-customizing-and-build-time-openapi/BuildTimeOpenApiDocumentGeneration/Program.cs",
@@ -54,25 +54,39 @@
       "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/Program.cs",
       "selection": {
         "start": {
-          "line": 10,
+          "line": 31,
           "character": 1
         },
         "end": {
-          "line": 13,
-          "character": 54
+          "line": 34,
+          "character": 4
         }
       },
-      "description": "We might want to change the way OpenAPI files are generated. There's quite a lot of options available in the `AddOpenApi` overloads!\r\n\r\nWe're not going through all of them. Some more are covered in the docs. I want to focus on the transformers.\r\n\r\nFirst, let's look at the OpenAPI version. We can switch to OpenAPI 3 or OpenAPI 2."
+      "description": "As discussed before, we can change the Json Number Handling to Strict to prevent numbers from being a int AND string"
     },
     {
       "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/Program.cs",
       "selection": {
         "start": {
-          "line": 15,
+          "line": 11,
+          "character": 1
+        },
+        "end": {
+          "line": 13,
+          "character": 1
+        }
+      },
+      "description": "We might want to change the way OpenAPI files are generated. There's quite a lot of options available in the `AddOpenApi` overloads!\r\n\r\nWe're not going through all of them. Some more are covered in the docs. I want to focus on the transformers.\r\n\r\nFirst, let's look at the OpenAPI version. We can switch to OpenAPI 3.0, 3.1 or 2."
+    },
+    {
+      "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/Program.cs",
+      "selection": {
+        "start": {
+          "line": 14,
           "character": 4
         },
         "end": {
-          "line": 25,
+          "line": 24,
           "character": 8
         }
       },
@@ -96,11 +110,11 @@
       "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/Program.cs",
       "selection": {
         "start": {
-          "line": 41,
+          "line": 45,
           "character": 1
         },
         "end": {
-          "line": 48,
+          "line": 52,
           "character": 2
         }
       },
@@ -110,15 +124,30 @@
       "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/Program.cs",
       "selection": {
         "start": {
-          "line": 50,
+          "line": 54,
           "character": 1
         },
         "end": {
-          "line": 61,
+          "line": 65,
           "character": 1
         }
       },
-      "description": "Finally, we can transform schemas. A schema is a model.\r\n\r\nNormally, if the Json Type Info would hold a decimal, OpenAPI would map it to a double. It does this because there is no \"official\" better format. \r\n\r\nThis transformer changes the `format` to `decimal`, instead. This might help OpenAPI tooling like API client generators to generate C# decimals."
+      "description": "And then there's the schema transformer. A schema is a model.\r\n\r\nNormally, if the Json Type Info would hold a decimal, OpenAPI would map it to a double. It does this because there is no \"official\" better format. \r\n\r\nThis transformer changes the `format` to `decimal`, instead. This might help OpenAPI tooling like API client generators to generate C# decimals."
+    },
+    {
+      "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/WeatherEndpoints.cs",
+      "selection": {
+        "start": {
+          "line": 27,
+          "character": 9
+        },
+        "end": {
+          "line": 34,
+          "character": 8
+        }
+      },
+      "description": "And here you can see an endpoint specific operation transformer. Useful for changing OpenAPI properties for a specific endpoint, or to set specific OpenAPI properties that can't be set with normal code",
+      "line": 27
     },
     {
       "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/openapi.json",
@@ -150,13 +179,18 @@
     },
     {
       "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/openapi.json",
+      "description": "Here you can see the result of the endpoint specific operation transformer, marking the endpoint as deprecated",
+      "line": 65
+    },
+    {
+      "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/openapi.json",
       "selection": {
         "start": {
-          "line": 68,
+          "line": 84,
           "character": 1
         },
         "end": {
-          "line": 71,
+          "line": 87,
           "character": 15
         }
       },

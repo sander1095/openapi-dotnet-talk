@@ -24,6 +24,14 @@ public static class WeatherEndpoints
         })
         .WithName("GetWeatherForecast");
 
+        app.MapGet("/old-endpoint", () => "This is an old endpoint")
+        .WithName("old-endpoint")
+        .AddOpenApiOperationTransformer((operation, context, cancellationToken) =>
+        {
+            operation.Deprecated = true;
+            return Task.CompletedTask;
+        });
+
         return app;
     }
 }

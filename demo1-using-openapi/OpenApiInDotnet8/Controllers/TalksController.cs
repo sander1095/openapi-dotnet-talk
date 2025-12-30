@@ -38,6 +38,7 @@ public class TalksController : ControllerBase
     /// </summary>
     /// <param name="requestBody">The requestbody for the talk</param>
     /// <returns>The created talk</returns>
+    /// <response code="409">Returned when a talk with the given title already exists</response>
     [HttpPost(Name = "Talks_CreateTalk")]
     [ProducesResponseType<TalkModel>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
