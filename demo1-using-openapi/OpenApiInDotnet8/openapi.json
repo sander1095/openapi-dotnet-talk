@@ -131,7 +131,7 @@
             }
           },
           "409": {
-            "description": "Conflict",
+            "description": "Returned when a talk with the given title already exists",
             "content": {
               "text/plain": {
                 "schema": {
@@ -260,7 +260,6 @@
           },
           "roomName": {
             "type": "string",
-            "description": "The name of the room where the talk will take place.",
             "nullable": true
           }
         },
@@ -320,7 +319,6 @@
           },
           "roomName": {
             "type": "string",
-            "description": "The name of the room where the talk will take place.",
             "nullable": true
           }
         },

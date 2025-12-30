@@ -17,7 +17,7 @@ public static class TalkEndpoints
 
         api.MapGet("/", GetTalks).WithName("Talks_GetTalks");
         api.MapGet("/{id:int:min(1)}", GetTalk).WithName("Talks_GetTalk");
-        api.MapPost("/", CreateTalk);
+        api.MapPost("/", CreateTalk).WithName("Talks_CreateTalk");
 
         return app;
     }
@@ -41,6 +41,7 @@ public static class TalkEndpoints
     /// </summary>
     /// <param name="requestBody">The requestbody for the talk</param>
     /// <returns>The created talk</returns>
+    /// <response code="409">Returned when a talk with the given title already exists</response>
     public static Results<Ok<TalkModel>, ValidationProblem, Conflict> CreateTalk(CreateTalkModel requestBody)
     {
         if (SampleTalks.Talks.Any(x => x.Title == requestBody.Title))

@@ -142,11 +142,11 @@
       "file": "demo1-using-openapi/OpenApiInDotnet8/openapi.json",
       "selection": {
         "start": {
-          "line": 269,
+          "line": 268,
           "character": 1
         },
         "end": {
-          "line": 295,
+          "line": 294,
           "character": 35
         }
       },
@@ -156,11 +156,11 @@
       "file": "demo1-using-openapi/OpenApiInDotnet8/openapi.json",
       "selection": {
         "start": {
-          "line": 296,
+          "line": 295,
           "character": 7
         },
         "end": {
-          "line": 328,
+          "line": 327,
           "character": 8
         }
       },
@@ -274,11 +274,11 @@
       "file": "demo1-using-openapi/MinimalApiDotnet10/TalkEndpoints.cs",
       "selection": {
         "start": {
-          "line": 17,
+          "line": 14,
           "character": 1
         },
         "end": {
-          "line": 26,
+          "line": 23,
           "character": 6
         }
       },
@@ -310,7 +310,12 @@
           "character": 6
         }
       },
-      "description": "This endpoint returns multiple statuses. To deal with this, we use `Results`, which is kind of a union type, to indicate that this either returns an `OK` with a `TalkModel` or a `NotFound`.\r\n\r\nThe create talk endpoint is very similar, so I'll skip that one for now to save time."
+      "description": "This endpoint returns multiple statuses. To deal with this, we use `Results`, which is kind of a union type, to indicate that this either returns an `OK` with a `TalkModel` or a `NotFound`."
+    },
+    {
+      "file": "demo1-using-openapi/MinimalApiDotnet10/TalkEndpoints.cs",
+      "description": "Finally, we can use several approaches for setting the response descriptions:\r\n\r\n- Use the `response` XML Tag like we do here.\r\n- Use `[ProducesResponseType(409, Description = \"DESC_HERE\")]`\r\n- Use an endpoint specific operation transformer in `MapTalkEndpoints`.\r\n\r\n```csharp\r\n.AddOpenApiOperationTransformer((operation, context, cancellationToken) => \r\n{ \r\n    operation.Responses[\"409\"].Description = \"Talk with this title already exists\"; \r\n    return Task.CompletedTask;\r\n})\r\n```\r\n\r\nI'm not a really big fan of all approaches, though...\r\n\r\n- XML comments do not give any auto-complete\r\n- With Controllers, the 2nd option (`ProducesResponseType`) lives right next to the code, and can declare both the possible types, statuses and response descriptions. Here, you can use the attribute, but you'll have to keep the response type and TypedResults in sync.\r\n- Endpoint specific transformers are again decoupled from the code if you write it like this.",
+      "line": 44
     },
     {
       "file": "demo1-using-openapi/AheadOfTime/AheadOfTime.csproj",

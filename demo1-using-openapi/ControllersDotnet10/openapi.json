@@ -137,7 +137,7 @@
             }
           },
           "409": {
-            "description": "Conflict",
+            "description": "Returned when a talk with the given title already exists",
             "content": {
               "text/plain": {
                 "schema": {
