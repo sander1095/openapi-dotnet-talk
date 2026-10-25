@@ -1,12 +1,12 @@
 {
-  "openapi": "3.1.1",
+  "openapi": "3.2.0",
   "info": {
-    "title": "ControllersDotnet10 | v1",
+    "title": "Controllers | v1",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "http://localhost:5301/"
+      "url": "http://localhost:5301"
     }
   ],
   "paths": {
@@ -17,6 +17,26 @@
         ],
         "operationId": "Talks_GetTalks",
         "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "200": {
             "description": "OK",
             "content": {
@@ -42,26 +62,6 @@
                   "items": {
                     "$ref": "#/components/schemas/TalkModel"
                   }
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -96,6 +96,26 @@
           "required": true
         },
         "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "200": {
             "description": "OK",
             "content": {
@@ -138,26 +158,6 @@
           },
           "409": {
             "description": "Returned when a talk with the given title already exists",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "",
             "content": {
               "text/plain": {
                 "schema": {
