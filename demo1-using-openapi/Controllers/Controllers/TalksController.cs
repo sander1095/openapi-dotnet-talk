@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-using ApiModels;
+﻿using ApiModels;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,14 +19,11 @@ public class TalksController : ControllerBase
     [HttpGet("{id:int:min(1)}", Name = "Talks_GetTalk")]
     [ProducesResponseType<TalkModel>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public ActionResult<CreateTalkModel> GetTalk(int id)
+    public ActionResult<TalkModel> GetTalk(int id)
     {
         var talk = SampleTalks.Talks.FirstOrDefault(x => x.Id == id);
         if (talk == null)
         {
-            // Comment out the 404 response type to get the following warning
-            // thanks to <IncludeOpenAPIAnalyzers> in the csproj.
-            // Warning API1000 Action method returns undeclared status code '404' 
             return NotFound();
         }
 
