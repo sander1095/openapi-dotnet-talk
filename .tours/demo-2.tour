@@ -4,197 +4,184 @@
   "description": "This is a tour that will guide you through the code of the second demo.",
   "steps": [
     {
-      "file": "demo2-customizing-and-build-time-openapi/BuildTimeOpenApiDocumentGeneration/BuildTimeOpenApiDocumentGeneration.csproj",
+      "file": "demo2-customizing-and-whats-new-in-dotnet11/CustomizingOpenApi/Program.cs",
+      "line": 13,
+      "selection": {
+        "start": {
+          "line": 9,
+          "character": 1
+        },
+        "end": {
+          "line": 13,
+          "character": 57
+        }
+      },
+      "description": "We might want to change the way OpenAPI files are generated. There's quite a lot of options available in the `AddOpenApi` overloads!\r\n\r\nWe're not going through all of them. Some more are covered in the docs. I want to focus on the transformers.\r\n\r\nFirst, let's look at the OpenAPI version. .NET 11 generates OpenAPI 3.2 by default. Not all tooling supports 3.2 yet, so you can switch to 3.1, 3.0 or 2 with `OpenApiVersion`.\r\n\r\nFurther down, we change the Json Number Handling to Strict to prevent numbers from being a int AND string."
+    },
+    {
+      "file": "demo2-customizing-and-whats-new-in-dotnet11/CustomizingOpenApi/Program.cs",
+      "line": 24,
+      "selection": {
+        "start": {
+          "line": 15,
+          "character": 1
+        },
+        "end": {
+          "line": 34,
+          "character": 8
+        }
+      },
+      "description": "Next, there's transformers. These allow you to change the looks of an OpenAPI document, operation or schema.\r\n\r\nEach of them can be a `Func<>`, an instance of a class of which you've implemented the corresponding interface, or a reference to that class with a generic type.\r\n\r\nThe most obvious time you might use this is to change metadata about a document. In this case, we're adding some useful contact information to the document. Very useful if this API is public, or if your organization has lots of teams!\r\n\r\nThis transformer also adds hierarchical tags, which are new in OpenAPI 3.2. A tag can have a `parent`, a `kind` (like `nav`) and a `summary`. There's no attribute or extension method for these, so you need a document transformer.\r\n\r\nThe endpoint tags (`Forecasts` and `Alerts`) are already in `document.Tags` when the transformer runs. We add a `Weather` tag and make it their parent."
+    },
+    {
+      "file": "demo2-customizing-and-whats-new-in-dotnet11/CustomizingOpenApi/Program.cs",
+      "line": 56,
+      "selection": {
+        "start": {
+          "line": 56,
+          "character": 1
+        },
+        "end": {
+          "line": 63,
+          "character": 2
+        }
+      },
+      "description": "Now, let's look at the operation transformer we registered with `AddOperationTransformer`. An operation is an endpoint, basically.\r\n\r\nThis transformer will be quite simple. It will add a 500 error response to each operation!\r\n\r\nThe context gives you access to some more info about the OpenAPI document and the service provider, should you need to query some specific services."
+    },
+    {
+      "file": "demo2-customizing-and-whats-new-in-dotnet11/CustomizingOpenApi/Program.cs",
+      "line": 69,
+      "selection": {
+        "start": {
+          "line": 65,
+          "character": 1
+        },
+        "end": {
+          "line": 75,
+          "character": 2
+        }
+      },
+      "description": "And then there's the schema transformer. A schema is a model.\r\n\r\nNormally, if the Json Type Info would hold a decimal, OpenAPI would map it to a double. It does this because there is no \"official\" better format.\r\n\r\nThis transformer changes the `format` to `decimal`, instead. This might help OpenAPI tooling like API client generators to generate C# decimals."
+    },
+    {
+      "file": "demo2-customizing-and-whats-new-in-dotnet11/CustomizingOpenApi/WeatherEndpoints.cs",
+      "line": 30,
+      "selection": {
+        "start": {
+          "line": 30,
+          "character": 1
+        },
+        "end": {
+          "line": 45,
+          "character": 12
+        }
+      },
+      "description": "New in .NET 11: `[Obsolete]` marks an operation as `deprecated: true` in the OpenAPI document. No transformer needed! This also works on controller actions, models and properties.\r\n\r\nBelow that, you can see an endpoint specific operation transformer. Useful for changing OpenAPI properties for a specific endpoint, or to set specific OpenAPI properties that can't be set with normal code. Here, it links the alerts endpoint to external documentation, which no attribute can do."
+    },
+    {
+      "file": "demo2-customizing-and-whats-new-in-dotnet11/WhatsNewInDotnet11/QueryEndpoints.cs",
+      "line": 10,
+      "selection": {
+        "start": {
+          "line": 9,
+          "character": 1
+        },
+        "end": {
+          "line": 20,
+          "character": 28
+        }
+      },
+      "description": "Let's look at more new things in .NET 11 and OpenAPI 3.2! First up: HTTP `QUERY`.\r\n\r\n`QUERY` is safe and idempotent like `GET`, but it has a request body like `POST`. Perfect for complex searches that don't fit in a query string!\r\n\r\nThere's no `MapQuery` until .NET 12 (https://github.com/dotnet/aspnetcore/issues/68331), so we use `MapMethods` with `\"QUERY\"`. ASP.NET Core binds `TalkSearch` from the body automatically.\r\n\r\nOpenAPI 3.2 has a `query` operation. In OpenAPI 3.0 and 3.1 documents, the operation ends up under the `x-oai-additionalOperations` extension: https://spec.openapis.org/registry/extension/x-oai-additionalOperations"
+    },
+    {
+      "file": "demo2-customizing-and-whats-new-in-dotnet11/WhatsNewInDotnet11/Controllers/SpeakersController.cs",
+      "line": 19,
+      "selection": {
+        "start": {
+          "line": 17,
+          "character": 1
+        },
+        "end": {
+          "line": 20,
+          "character": 73
+        }
+      },
+      "description": "Controllers can do this too, with `[AcceptVerbs(\"QUERY\")]`. Thanks to `[ApiController]`, the `SpeakerSearch` parameter comes from the body.\r\n\r\nA small gotcha: `[AcceptVerbs(HttpMethods.Query)]` looks nicer, but it doesn't compile (CS0182). Attribute arguments must be constants, and `HttpMethods.Query` is `static readonly`. So use the string."
+    },
+    {
+      "file": "demo2-customizing-and-whats-new-in-dotnet11/WhatsNewInDotnet11/openapi.json",
+      "line": 14,
+      "selection": {
+        "start": {
+          "line": 13,
+          "character": 1
+        },
+        "end": {
+          "line": 28,
+          "character": 11
+        }
+      },
+      "description": "And here's the result: a `query` operation, right where you'd normally see `get` or `post`, with `TalkSearch` as the request body.\r\n\r\nThe controller version is further down, at `/api/speakers/search` (line 152)."
+    },
+    {
+      "file": "demo2-customizing-and-whats-new-in-dotnet11/WhatsNewInDotnet11/Program.cs",
+      "line": 14,
       "selection": {
         "start": {
           "line": 12,
           "character": 1
         },
         "end": {
-          "line": 16,
-          "character": 24
-        }
-      },
-      "description": "We're starting the 2nd demo with generating OpenAPI specs at build-time. For this, we're using `Microsoft.AspNetCore.OpenApi` and `Microsoft.Extensions.ApiDescription.Server`."
-    },
-    {
-      "file": "demo2-customizing-and-build-time-openapi/BuildTimeOpenApiDocumentGeneration/BuildTimeOpenApiDocumentGeneration.csproj",
-      "selection": {
-        "start": {
-          "line": 7,
-          "character": 1
-        },
-        "end": {
-          "line": 8,
-          "character": 96
-        }
-      },
-      "description": "You can specify different settings for where you'd like this document to be generated. For example, we can use `OpenApiDocumentsDirectory` to save the OpenAPI spec into the project directory instead of `obj/`. \r\n\r\nWe can also use `OpenApiGenerateDocumentsOptions` to specify the file name. Normally, it's the name of the project. However, here we change it to `openapi-spec`.\r\n\r\nThere's a few more settings available, which you can find in the docs."
-    },
-    {
-      "file": "demo2-customizing-and-build-time-openapi/BuildTimeOpenApiDocumentGeneration/Program.cs",
-      "selection": {
-        "start": {
-          "line": 11,
-          "character": 1
-        },
-        "end": {
-          "line": 17,
-          "character": 2
-        }
-      },
-      "description": "Finally, this is optional.\r\n\r\nLike I said in the slides, this doesn't _purely_ generate the spec at build-time. It actually executes the entrypoint of your app with a mock server. \r\n\r\nIn some cases, you might want to prevent specific code paths being executed, like databases/configuration which might not be available or cause changes.\r\n\r\nWe can do this with the highlighted line of code. Any code in this block will only executed when we're NOT generating an OpenAPI spec at build time.\r\n\r\n\r\n**DO:**\r\n\r\n- Run `dotnet build` to generate the file\r\n  - If no file appears in this directory, run `dotnet clean` first"
-    },
-    {
-      "file": "demo2-customizing-and-build-time-openapi/BuildTimeOpenApiDocumentGeneration/openapi-spec.json",
-      "description": "And here we can see the generated OpenAPI file!",
-      "line": 1
-    },
-    {
-      "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/Program.cs",
-      "selection": {
-        "start": {
-          "line": 31,
-          "character": 1
-        },
-        "end": {
-          "line": 34,
-          "character": 4
-        }
-      },
-      "description": "As discussed before, we can change the Json Number Handling to Strict to prevent numbers from being a int AND string"
-    },
-    {
-      "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/Program.cs",
-      "selection": {
-        "start": {
-          "line": 11,
-          "character": 1
-        },
-        "end": {
-          "line": 13,
-          "character": 1
-        }
-      },
-      "description": "We might want to change the way OpenAPI files are generated. There's quite a lot of options available in the `AddOpenApi` overloads!\r\n\r\nWe're not going through all of them. Some more are covered in the docs. I want to focus on the transformers.\r\n\r\nFirst, let's look at the OpenAPI version. We can switch to OpenAPI 3.0, 3.1 or 2."
-    },
-    {
-      "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/Program.cs",
-      "selection": {
-        "start": {
           "line": 14,
-          "character": 4
+          "character": 59
+        }
+      },
+      "description": "Let's see this in action!\r\n\r\n**DO:**\r\n\r\n- Run this project and visit http://localhost:5306/scalar\r\n- Open `/api/talks/search` (it has a QUERY badge), click **Test Request**, set the body to `{ \"title\": \"open\" }` and send it. Scalar sends a real `QUERY` request!\r\n- Run `CustomizingOpenApi` and visit http://localhost:5305/scalar to show the `Forecasts` and `Alerts` tags nested under `Weather`, and the struck-through deprecated `/old-endpoint`.\r\n\r\nSwagger UI shows `QUERY` operations too, but hides **Try it out** for them. Add `\"query\"` to its `supportedSubmitMethods` setting (through `ConfigObject.AdditionalItems`) to enable it."
+    },
+    {
+      "file": "demo2-customizing-and-whats-new-in-dotnet11/WhatsNewInDotnet11/openapi.json",
+      "line": 57,
+      "selection": {
+        "start": {
+          "line": 56,
+          "character": 1
+        },
+        "end": {
+          "line": 73,
+          "character": 18
+        }
+      },
+      "description": "**Optional, skip if short on time!**\r\n\r\nServer-Sent Events. `ServerSentEventsEndpoints.cs` returns `TypedResults.ServerSentEvents` with an `IAsyncEnumerable<SseItem<TalkModel>>`.\r\n\r\nOpenAPI 3.2 describes a stream with `itemSchema`: the schema of every single event, with `data`, `event` and `id`. That's what goes over the wire. In .NET 10, the same code is described as the C# `SseItem<T>` object, with `eventType`, `eventId` and `reconnectionInterval`."
+    },
+    {
+      "file": "demo2-customizing-and-whats-new-in-dotnet11/WhatsNewInDotnet11/UnionEndpoints.cs",
+      "line": 27,
+      "selection": {
+        "start": {
+          "line": 24,
+          "character": 1
+        },
+        "end": {
+          "line": 27,
+          "character": 43
+        }
+      },
+      "description": "**Optional, skip if short on time!**\r\n\r\nC# 15 has unions! A `Session` is either a `TalkModel` or a `Workshop`, and the endpoint above returns one of them.\r\n\r\nThe OpenAPI document describes `Session` with `anyOf` and both cases. The JSON is the case value itself, so there's no discriminator."
+    },
+    {
+      "file": "demo2-customizing-and-whats-new-in-dotnet11/WhatsNewInDotnet11/ContentTypeEndpoints.cs",
+      "line": 23,
+      "selection": {
+        "start": {
+          "line": 23,
+          "character": 1
         },
         "end": {
           "line": 24,
-          "character": 8
+          "character": 63
         }
       },
-      "description": "Next, there's transformers. These allow you to change the looks of an OpenAPI document, operation or schema.\r\n\r\nEach of them can be a `Func<>`, an instance of a class of which you've implemented the corresponding interface, or a reference to that class with a generic type.\r\n\r\nThe most obvious time you might use this is to change metadata about a document. In this case, we're adding some useful contact information to the document. Very useful if this API is public, or if your organization has lots of teams!\r\n\r\n"
-    },
-    {
-      "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/Program.cs",
-      "selection": {
-        "start": {
-          "line": 27,
-          "character": 5
-        },
-        "end": {
-          "line": 27,
-          "character": 81
-        }
-      },
-      "description": "Now, let's add an operation transformer. An operation is an endpoint, basically."
-    },
-    {
-      "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/Program.cs",
-      "selection": {
-        "start": {
-          "line": 45,
-          "character": 1
-        },
-        "end": {
-          "line": 52,
-          "character": 2
-        }
-      },
-      "description": "This transformer will be quite simple. It will add a 500 error response to each operation!\r\n\r\nThe context gives you access to some more info about the OpenAPI document and the service provider, should you need to query some specific services."
-    },
-    {
-      "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/Program.cs",
-      "selection": {
-        "start": {
-          "line": 54,
-          "character": 1
-        },
-        "end": {
-          "line": 65,
-          "character": 1
-        }
-      },
-      "description": "And then there's the schema transformer. A schema is a model.\r\n\r\nNormally, if the Json Type Info would hold a decimal, OpenAPI would map it to a double. It does this because there is no \"official\" better format. \r\n\r\nThis transformer changes the `format` to `decimal`, instead. This might help OpenAPI tooling like API client generators to generate C# decimals."
-    },
-    {
-      "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/WeatherEndpoints.cs",
-      "selection": {
-        "start": {
-          "line": 27,
-          "character": 9
-        },
-        "end": {
-          "line": 34,
-          "character": 8
-        }
-      },
-      "description": "And here you can see an endpoint specific operation transformer. Useful for changing OpenAPI properties for a specific endpoint, or to set specific OpenAPI properties that can't be set with normal code",
-      "line": 27
-    },
-    {
-      "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/openapi.json",
-      "selection": {
-        "start": {
-          "line": 3,
-          "character": 5
-        },
-        "end": {
-          "line": 9,
-          "character": 9
-        }
-      },
-      "description": "Here you see the changes for the OpenAPI metadata"
-    },
-    {
-      "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/openapi.json",
-      "selection": {
-        "start": {
-          "line": 38,
-          "character": 1
-        },
-        "end": {
-          "line": 40,
-          "character": 14
-        }
-      },
-      "description": "You also see an 500 return code added to the operation"
-    },
-    {
-      "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/openapi.json",
-      "description": "Here you can see the result of the endpoint specific operation transformer, marking the endpoint as deprecated",
-      "line": 65
-    },
-    {
-      "file": "demo2-customizing-and-build-time-openapi/CustomizingOpenApi/openapi.json",
-      "selection": {
-        "start": {
-          "line": 84,
-          "character": 1
-        },
-        "end": {
-          "line": 87,
-          "character": 15
-        }
-      },
-      "description": "And finally, the number is stored as decimal"
+      "description": "**Optional, skip if short on time!**\r\n\r\nOne endpoint, two content types for the same status code: JSON and CSV. Both `Produces` calls end up under a single `200` response in the OpenAPI document.\r\n\r\nThis is only metadata. The handler checks the `Accept` header itself to return CSV."
     }
   ]
 }

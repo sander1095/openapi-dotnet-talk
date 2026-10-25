@@ -1,0 +1,18 @@
+<Project>
+
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- .NET 11 projects -->
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="11.0.0-rc.2.26504.105" />
+    <PackageVersion Include="Microsoft.Extensions.ApiDescription.Server" Version="11.0.0-rc.2.26504.105" />
+    <PackageVersion Include="Scalar.AspNetCore" Version="2.18.3" />
+    <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.3.1" />
+
+    <!-- .NET 8 project -->
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+  </ItemGroup>
+
+</Project>

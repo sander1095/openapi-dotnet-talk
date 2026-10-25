@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/Demo1/">
+    <Project Path="demo1-using-openapi/AheadOfTime/AheadOfTime.csproj" />
+    <Project Path="demo1-using-openapi/BuildTimeOpenApiDocumentGeneration/BuildTimeOpenApiDocumentGeneration.csproj" />
+    <Project Path="demo1-using-openapi/Controllers/Controllers.csproj" />
+    <Project Path="demo1-using-openapi/MinimalApi/MinimalApi.csproj" />
+    <Project Path="demo1-using-openapi/OpenApiInDotnet8/OpenApiInDotnet8.csproj" />
+  </Folder>
+  <Folder Name="/Demo2/">
+    <Project Path="demo2-customizing-and-whats-new-in-dotnet11/CustomizingOpenApi/CustomizingOpenApi.csproj" />
+    <Project Path="demo2-customizing-and-whats-new-in-dotnet11/WhatsNewInDotnet11/WhatsNewInDotnet11.csproj" />
+  </Folder>
+  <Folder Name="/Playground/" />
+  <Project Path="demo1-using-openapi/ApiModels/ApiModels.csproj" />
+</Solution>

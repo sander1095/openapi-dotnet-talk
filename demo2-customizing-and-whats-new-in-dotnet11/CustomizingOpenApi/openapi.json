@@ -1,0 +1,166 @@
+{
+  "openapi": "3.2.0",
+  "info": {
+    "title": "CustomizingOpenApi | v1",
+    "contact": {
+      "name": "Sander ten Brinke",
+      "url": "https://stenbrinke.nl",
+      "email": "s.tenbrinke2@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5305"
+    }
+  ],
+  "paths": {
+    "/weatherforecast": {
+      "get": {
+        "tags": [
+          "Forecasts"
+        ],
+        "operationId": "GetWeatherForecast",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/old-endpoint": {
+      "get": {
+        "tags": [
+          "Forecasts"
+        ],
+        "operationId": "old-endpoint",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/weather-alerts": {
+      "get": {
+        "tags": [
+          "Alerts"
+        ],
+        "externalDocs": {
+          "description": "Official weather warnings for Sweden",
+          "url": "https://www.smhi.se/en"
+        },
+        "operationId": "GetWeatherAlerts",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherAlert"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "WeatherAlert": {
+        "required": [
+          "title",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "WeatherForecast": {
+        "required": [
+          "date",
+          "temperatureC",
+          "summary",
+          "example"
+        ],
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "temperatureC": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "summary": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "example": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "temperatureF": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Alerts",
+      "parent": "Weather"
+    },
+    {
+      "name": "Forecasts",
+      "parent": "Weather"
+    },
+    {
+      "name": "Weather",
+      "summary": "Weather forecasts and alerts",
+      "kind": "nav"
+    }
+  ]
+}
