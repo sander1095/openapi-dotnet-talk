@@ -6,6 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <OpenApiDocumentsDirectory>.</OpenApiDocumentsDirectory>
     <OpenApiGenerateDocumentsOptions>--file-name openapi-spec</OpenApiGenerateDocumentsOptions>
+    <!-- The environment the app runs in during build-time generation. The default is Production. -->
+    <OpenApiGenerationEnvironment>Development</OpenApiGenerationEnvironment>
   </PropertyGroup>
 
   <ItemGroup>

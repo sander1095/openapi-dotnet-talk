@@ -1,4 +1,4 @@
-// https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/aspnetcore-openapi?view=aspnetcore-10.0&tabs=visual-studio#customizing-run-time-behavior-during-build-time-document-generation
+// https://learn.microsoft.com/aspnet/core/fundamentals/openapi/aspnetcore-openapi#customize-runtime-behavior-during-build-time-document-generation
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,7 +6,15 @@ builder.WebHost.UseUrls("http://localhost:5304");
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddOpenApi(x =>
+{
+    // Shows which environment generated the document. See <OpenApiGenerationEnvironment> in the csproj.
+    x.AddDocumentTransformer((document, context, cancellationToken) =>
+    {
+        document.Info.Description = $"Generated in the {builder.Environment.EnvironmentName} environment";
+        return Task.CompletedTask;
+    });
+});
 
 // This checks if we're currently generating an openapi spec at build-time
 if (Assembly.GetEntryAssembly()?.GetName().Name != "GetDocument.Insider")
