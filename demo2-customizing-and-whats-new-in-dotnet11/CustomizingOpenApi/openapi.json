@@ -1,5 +1,5 @@
 {
-  "openapi": "3.1.1",
+  "openapi": "3.2.0",
   "info": {
     "title": "CustomizingOpenApi | v1",
     "contact": {
@@ -11,14 +11,14 @@
   },
   "servers": [
     {
-      "url": "http://localhost:5305/"
+      "url": "http://localhost:5305"
     }
   ],
   "paths": {
     "/weatherforecast": {
       "get": {
         "tags": [
-          "CustomizingOpenApi"
+          "Forecasts"
         ],
         "operationId": "GetWeatherForecast",
         "responses": {
@@ -44,7 +44,7 @@
     "/old-endpoint": {
       "get": {
         "tags": [
-          "CustomizingOpenApi"
+          "Forecasts"
         ],
         "operationId": "old-endpoint",
         "responses": {
@@ -64,10 +64,55 @@
         },
         "deprecated": true
       }
+    },
+    "/weather-alerts": {
+      "get": {
+        "tags": [
+          "Alerts"
+        ],
+        "externalDocs": {
+          "description": "Official weather warnings for Sweden",
+          "url": "https://www.smhi.se/en"
+        },
+        "operationId": "GetWeatherAlerts",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherAlert"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "WeatherAlert": {
+        "required": [
+          "title",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
       "WeatherForecast": {
         "required": [
           "date",
@@ -105,7 +150,17 @@
   },
   "tags": [
     {
-      "name": "CustomizingOpenApi"
+      "name": "Alerts",
+      "parent": "Weather"
+    },
+    {
+      "name": "Forecasts",
+      "parent": "Weather"
+    },
+    {
+      "name": "Weather",
+      "summary": "Weather forecasts and alerts",
+      "kind": "nav"
     }
   ]
 }

@@ -1,15 +1,16 @@
-
 using CustomizingOpenApi;
 using Microsoft.AspNetCore.OpenApi;
 using Microsoft.OpenApi;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseUrls("http://localhost:5305");
 
 builder.Services.AddOpenApi(x =>
 {
-    // You can change the OpenAPI version if you want.
-    x.OpenApiVersion = OpenApiSpecVersion.OpenApi3_1;
+    // .NET 11 generates OpenAPI 3.2 documents by default.
+    // Switch to 3.1 for tooling that doesn't support 3.2 yet:
+    // x.OpenApiVersion = OpenApiSpecVersion.OpenApi3_1;
 
     x.AddDocumentTransformer((document, context, cancellationToken) =>
     {
@@ -19,6 +20,15 @@ builder.Services.AddOpenApi(x =>
             Email = "s.tenbrinke2@gmail.com",
             Url = new Uri("https://stenbrinke.nl")
         };
+
+        // OpenAPI 3.2: hierarchical tags with "parent", "kind" and "summary"
+        document.Tags ??= new HashSet<OpenApiTag>();
+        document.Tags.Add(new OpenApiTag { Name = "Weather", Kind = "nav", Summary = "Weather forecasts and alerts" });
+
+        foreach (var tag in document.Tags.Where(t => t.Name is "Forecasts" or "Alerts"))
+        {
+            tag.Parent = new OpenApiTagReference("Weather", document);
+        }
 
         return Task.CompletedTask;
     });
@@ -36,6 +46,7 @@ builder.Services.ConfigureHttpJsonOptions(x =>
 var app = builder.Build();
 
 app.MapOpenApi();
+app.MapScalarApiReference();
 
 app.MapWeatherEndpoints();
 

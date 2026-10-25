@@ -1,4 +1,6 @@
-﻿namespace CustomizingOpenApi;
+﻿using Microsoft.OpenApi;
+
+namespace CustomizingOpenApi;
 
 public static class WeatherEndpoints
 {
@@ -22,13 +24,23 @@ public static class WeatherEndpoints
                 .ToArray();
             return forecast;
         })
-        .WithName("GetWeatherForecast");
+        .WithName("GetWeatherForecast")
+        .WithTags("Forecasts");
 
-        app.MapGet("/old-endpoint", () => "This is an old endpoint")
+        app.MapGet("/old-endpoint", [Obsolete("Use /weatherforecast")] () => "This is an old endpoint")
         .WithName("old-endpoint")
+        .WithTags("Forecasts");
+
+        app.MapGet("/weather-alerts", () => new[] { new WeatherAlert("Storm", "Strong winds along the coast of Malmö") })
+        .WithName("GetWeatherAlerts")
+        .WithTags("Alerts")
         .AddOpenApiOperationTransformer((operation, context, cancellationToken) =>
         {
-            operation.Deprecated = true;
+            operation.ExternalDocs = new OpenApiExternalDocs
+            {
+                Description = "Official weather warnings for Sweden",
+                Url = new Uri("https://www.smhi.se/en")
+            };
             return Task.CompletedTask;
         });
 
@@ -40,3 +52,5 @@ internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
+
+internal record WeatherAlert(string Title, string Description);
