@@ -402,4 +402,4 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-demo2-customizing-and-build-time-openapi/BuildTimeOpenApiDocumentGeneration/openapi-spec.json
+demo1-using-openapi/BuildTimeOpenApiDocumentGeneration/openapi-spec.json

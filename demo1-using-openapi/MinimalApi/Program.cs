@@ -1,4 +1,4 @@
-using MinimalApiDotnet10;
+using MinimalApi;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);

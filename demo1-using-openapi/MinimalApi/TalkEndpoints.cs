@@ -2,7 +2,7 @@
 
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace MinimalApiDotnet10;
+namespace MinimalApi;
 
 /// <remarks>
 /// This example doesn't have feature parity with the .NET 10 controllers project.
