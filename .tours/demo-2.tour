@@ -106,7 +106,7 @@
           "character": 73
         }
       },
-      "description": "Controllers can do this too, with `[AcceptVerbs(\"QUERY\")]`. Thanks to `[ApiController]`, the `SpeakerSearch` parameter comes from the body.\r\n\r\nA small gotcha: `[AcceptVerbs(HttpMethods.Query)]` looks nicer, but it doesn't compile (CS0182). Attribute arguments must be constants, and `HttpMethods.Query` is `static readonly`. So use the string."
+      "description": "Controllers can do this too, with `[AcceptVerbs(\"QUERY\")]`. Thanks to `[ApiController]`, the `SpeakerSearch` parameter comes from the body."
     },
     {
       "file": "demo2-customizing-and-whats-new-in-dotnet11/WhatsNewInDotnet11/openapi.json",
