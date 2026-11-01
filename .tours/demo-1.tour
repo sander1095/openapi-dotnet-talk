@@ -125,7 +125,7 @@
           "character": 94
         }
       },
-      "description": "Let's go and run this demo and take a quick look at Scalar!\r\n\r\n**DO:**\r\n\r\n- Run this project.\r\n- Visit http://localhost:5301/openapi/v1.json for the OpenAPI endpoint.\r\n  - This is different compared to Swashbuckle, which uses `swagger/v1/swagger.json`\r\n- Visit http://localhost:5301/openapi/v1.yaml for the same document in YAML.\r\n- Visit http://localhost:5301/scalar and show off the UI, API client code and test a request.\r\n- Visit http://localhost:5301/swagger to show that Swagger UI works, too."
+      "description": "Let's go and run this demo and take a quick look at Scalar!\r\n\r\n**DO:**\r\n\r\n- Run this project.\r\n- Visit http://localhost:5301/openapi/v1.json for the OpenAPI endpoint.\r\n  - This is different compared to Swashbuckle, which uses `swagger/v1/swagger.json`\r\n- Visit http://localhost:5301/openapi/v1.yaml for the same document in YAML.\r\n- Visit http://localhost:5301/scalar/#tag/talks/GET/api/talks and show off the UI, API client code and test a request.\r\n- Visit http://localhost:5301/swagger to show that Swagger UI works, too."
     },
     {
       "file": "demo1-using-openapi/MinimalApi/TalkEndpoints.cs",

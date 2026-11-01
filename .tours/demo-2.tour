@@ -136,7 +136,7 @@
           "character": 59
         }
       },
-      "description": "Let's see this in action!\r\n\r\n**DO:**\r\n\r\n- Run this project and visit http://localhost:5306/scalar\r\n- Open `/api/talks/search` (it has a QUERY badge), click **Test Request**, set the body to `{ \"title\": \"open\" }` and send it. Scalar sends a real `QUERY` request!\r\n- Run `CustomizingOpenApi` and visit http://localhost:5305/scalar to show the `Forecasts` and `Alerts` tags nested under `Weather`, and the struck-through deprecated `/old-endpoint`.\r\n\r\nSwagger UI shows `QUERY` operations too, but hides **Try it out** for them. Add `\"query\"` to its `supportedSubmitMethods` setting (through `ConfigObject.AdditionalItems`) to enable it."
+      "description": "Let's see this in action!\r\n\r\n**DO:**\r\n\r\n- Run this project and visit http://localhost:5306/scalar/#tag/talks/QUERY/api/talks/search (it has a QUERY badge), click **Test Request**, set the body to `{ \"title\": \"open\" }` and send it. Scalar sends a real `QUERY` request!\r\n- Run `CustomizingOpenApi` and visit http://localhost:5305/scalar/#tag/weather to show the `Forecasts` and `Alerts` tags nested under `Weather`, and http://localhost:5305/scalar/#tag/forecasts/GET/old-endpoint to show the struck-through deprecated `/old-endpoint`.\r\n\r\nSwagger UI shows `QUERY` operations too, but hides **Try it out** for them. Add `\"query\"` to its `supportedSubmitMethods` setting (through `ConfigObject.AdditionalItems`) to enable it."
     },
     {
       "file": "demo2-customizing-and-whats-new-in-dotnet11/WhatsNewInDotnet11/ServerSentEventsEndpoints.cs",
@@ -166,7 +166,7 @@
           "character": 18
         }
       },
-      "description": "OpenAPI 3.2 describes a stream with `itemSchema`: the schema of every single event, with `data`, `event` and `id`. That's what goes over the wire. In .NET 10, the same code is described as the C# `SseItem<T>` object, with `eventType`, `eventId` and `reconnectionInterval`.\r\n\r\n**DO:** Try it out in Scalar!"
+      "description": "OpenAPI 3.2 describes a stream with `itemSchema`: the schema of every single event, with `data`, `event` and `id`. That's what goes over the wire. In .NET 10, the same code is described as the C# `SseItem<T>` object, with `eventType`, `eventId` and `reconnectionInterval`.\r\n\r\n**DO:** Open http://localhost:5306/scalar/#tag/talks/GET/api/talks/live in Scalar and send the request. The events arrive one per second, each with the `talk` event type."
     },
     {
       "file": "demo2-customizing-and-whats-new-in-dotnet11/WhatsNewInDotnet11/UnionEndpoints.cs",
@@ -196,7 +196,7 @@
           "character": 9
         }
       },
-      "description": "The OpenAPI document describes `Session` with `anyOf` and both cases.\r\n\r\n**DO:** Try it out in Scalar!"
+      "description": "The OpenAPI document describes `Session` with `anyOf` and both cases.\r\n\r\n**DO:** Open http://localhost:5306/scalar/#tag/talks/GET/api/talks/{id}/session in Scalar and send it with an `id` of `5` to get a `TalkModel`, then with `999` to get a `Workshop`."
     },
     {
       "file": "demo2-customizing-and-whats-new-in-dotnet11/WhatsNewInDotnet11/ContentTypeEndpoints.cs",
