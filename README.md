@@ -6,7 +6,7 @@ The demos go from Swashbuckle in .NET 8 to `Microsoft.AspNetCore.OpenApi` in .NE
 
 ## Requirements
 
-- The .NET 11 RC2 SDK (`11.0.100-rc.2.26504.105`). [global.json](global.json) selects it and rolls forward to newer .NET 11 SDKs.
+- The .NET 11 RC3 SDK (`11.0.100-rc.3.26522.148`). [global.json](global.json) selects it and rolls forward to newer .NET 11 SDKs.
 - The ASP.NET Core 8 runtime for the `OpenApiInDotnet8` project.
 - [VS Code](https://code.visualstudio.com/) with the [CodeTour](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour) extension for the guided tours.
 
