@@ -2,7 +2,8 @@
 # Starts every app the demo tours run live and opens the demo pages in the browser,
 # in the order the tours use them. Press Ctrl+C to stop the apps.
 #
-# Usage: ./start-demos.sh [--all] [--no-browser]
+# Usage: ./start-demos.sh [--dotnet8] [--all] [--no-browser]
+#   --dotnet8     also start the .NET 8 Swashbuckle app (5300) and open its pages, for the optional .NET 8 tour
 #   --all         also start MinimalApi (5302) and AheadOfTime (5303), which the tours only show as code
 #   --no-browser  only start the apps
 set -euo pipefail
@@ -10,9 +11,11 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 start_all=false
+start_dotnet8=false
 open_browser=true
 for arg in "$@"; do
   case "$arg" in
+    --dotnet8) start_dotnet8=true ;;
     --all) start_all=true ;;
     --no-browser) open_browser=false ;;
     *) echo "Unknown option: $arg" >&2; exit 1 ;;
@@ -21,11 +24,14 @@ done
 
 # project:port
 projects=(
-  "demo1-using-openapi/OpenApiInDotnet8:5300"
   "demo1-using-openapi/Controllers:5301"
   "demo2-customizing-and-whats-new-in-dotnet11/CustomizingOpenApi:5305"
   "demo2-customizing-and-whats-new-in-dotnet11/WhatsNewInDotnet11:5306"
 )
+
+if $start_dotnet8; then
+  projects=("demo1-using-openapi/OpenApiInDotnet8:5300" "${projects[@]}")
+fi
 
 if $start_all; then
   projects+=(
@@ -36,9 +42,7 @@ fi
 
 # Pages in tour order: port|path. See .tours/demo-1.tour and .tours/demo-2.tour.
 pages=(
-  # Demo 1, step 4: Swagger UI on the .NET 8 app
-  "5300|/swagger"
-  # Demo 1, step 9: the .NET 11 controllers app
+  # Demo 1, step 6: the .NET 11 controllers app
   "5301|/openapi/v1.json"
   "5301|/openapi/v1.yaml"
   "5301|/scalar/#tag/talks/GET/api/talks"
@@ -54,6 +58,11 @@ pages=(
   # Demo 2, step 15: JSON and CSV content types
   "5306|/scalar/#tag/talks/GET/api/talks/{id}/export"
 )
+
+# The optional .NET 8 tour (.tours/dotnet-8.tour) comes first: Swagger UI on the Swashbuckle app
+if $start_dotnet8; then
+  pages=("5300|/swagger" "${pages[@]}")
+fi
 
 if [[ -n "${BROWSER_CMD:-}" ]]; then
   opener="$BROWSER_CMD"

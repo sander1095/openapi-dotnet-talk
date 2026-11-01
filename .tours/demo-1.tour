@@ -3,21 +3,6 @@
   "title": "Demo 1",
   "steps": [
     {
-      "file": "demo1-using-openapi/OpenApiInDotnet8/Program.cs",
-      "line": 9,
-      "selection": {
-        "start": {
-          "line": 7,
-          "character": 1
-        },
-        "end": {
-          "line": 21,
-          "character": 20
-        }
-      },
-      "description": "In .NET 8, the default OpenAPI library was `Swashbuckle.AspNetCore` (see the csproj).\r\n\r\nAdding OpenAPI support to ASP.NET Core is quite simple!\r\n\r\nWe need to add some services to the DI container and then map OpenAPI and SwaggerUI endpoints."
-    },
-    {
       "file": "demo1-using-openapi/ApiModels/TalkModel.cs",
       "line": 6,
       "selection": {
@@ -33,36 +18,6 @@
       "description": "Before we look into endpoints and OpenAPI configuration, I want to show off some shared models between these demo projects.\r\n\r\nMost demo's will feature a fake, small conference talk API. This is the `TalkModel` that gets returned by the API, which is an `id`, `title`, `length in minutes` and `room name`.\r\n\r\nTo create a talk, we need to submit a title, length in minutes and a room name. That's the `CreateTalkModel` in the same folder.\r\n\r\nAs you can see, there are several attributes. These are used for validation and to enrich the OpenAPI document."
     },
     {
-      "file": "demo1-using-openapi/OpenApiInDotnet8/Controllers/TalksController.cs",
-      "line": 41,
-      "selection": {
-        "start": {
-          "line": 36,
-          "character": 1
-        },
-        "end": {
-          "line": 47,
-          "character": 75
-        }
-      },
-      "description": "Some demo's use Minimal API's. Some use controllers. This one (which is still .NET 8) features controllers.\r\n\r\nThis is the endpoint which creates a talk. You can see XML comments, which helps decorate the summary, parameter and description for OpenAPI.\r\n\r\nThis endpoint is a POST, and it can do multiple things. `ProducesResponseType` tells the OpenAPI document about each of them:\r\n\r\n- It can return 200 OK with the created talk.\r\n- It can return 400 Bad Request when validation fails.\r\n- It can also return 409 Conflict if the talk title already exists.\r\n\r\n`ProducesDefaultResponseType` is quite a cool attribute. It tells the OpenAPI spec that any undocumented status code returns `Problem Details`, the standard for API error reporting.\r\n\r\nFinally, I want to call some attention to setting response descriptions in .NET 8. You can see a `response` tag here, which sets the code (`409`) with the response description.\r\n\r\nHowever, this `response` doesn't show up in autocomplete, and you need to keep your XML in sync with the attribute."
-    },
-    {
-      "file": "demo1-using-openapi/OpenApiInDotnet8/openapi.json",
-      "line": 312,
-      "selection": {
-        "start": {
-          "line": 308,
-          "character": 1
-        },
-        "end": {
-          "line": 313,
-          "character": 13
-        }
-      },
-      "description": "This is the OpenAPI document that Swashbuckle generates.\r\n\r\nEvery operation has the \"default\" case I've talked about (for example on line 44). Any status codes that are returned will have the mentioned response body, which is Problem Details.\r\n\r\nAnd this is the talk model. You can see the required properties, and then each property being defined with a type, description and nullability.\r\n\r\nFun fact: You can see Swashbuckle making a small \"mistake\". It sets `Title` up as nullable, even though we used C#'s `required` keyword AND marked it as `string`, which is non-nullable. I believe NSwag does do this correctly 😉.\r\n\r\n**DO:**\r\n\r\n- Go to http://localhost:5300/swagger to show off SwaggerUI quickly"
-    },
-    {
       "file": "demo1-using-openapi/Controllers/Controllers.csproj",
       "line": 12,
       "selection": {
@@ -75,7 +30,7 @@
           "character": 15
         }
       },
-      "description": "Now that we understand how this worked in .NET 8, let's take a look at .NET 11!\r\n\r\nThis uses `Microsoft.AspNetCore.OpenApi` for creating the OpenAPI spec, and `Scalar` for rendering an UI based on the document. Scalar is newer and has cool features!\r\n\r\nSwagger UI isn't included by default, but you can still add it with `Swashbuckle.AspNetCore.SwaggerUI`. That package only contains the UI, not Swashbuckle's document generation."
+      "description": "Let's look at the controllers demo! It uses `Microsoft.AspNetCore.OpenApi` for creating the OpenAPI spec, and `Scalar` for rendering an UI based on the document. Scalar is newer and has cool features!\r\n\r\nSwagger UI isn't included by default, but you can still add it with `Swashbuckle.AspNetCore.SwaggerUI`. That package only contains the UI, not Swashbuckle's document generation."
     },
     {
       "file": "demo1-using-openapi/Controllers/Program.cs",
@@ -90,12 +45,12 @@
           "character": 94
         }
       },
-      "description": "Adding OpenAPI in .NET 11 is still very easy!\r\n\r\n- `AddOpenApi` adds the services.\r\n- `MapOpenApi` maps the document at `/openapi/v1.json`.\r\n- Call `MapOpenApi` with a `.yaml` route to get the same document as YAML.\r\n- `MapScalarApiReference` adds Scalar at `/scalar`.\r\n- `UseSwaggerUI` adds Swagger UI at `/swagger`. We point it to `/openapi/v1.json`, because Swagger UI looks for Swashbuckle's `/swagger/v1/swagger.json` by default."
+      "description": "Adding OpenAPI in .NET 11 is very easy!\r\n\r\n- `AddOpenApi` adds the services.\r\n- `MapOpenApi` maps the document at `/openapi/v1.json`.\r\n- Call `MapOpenApi` with a `.yaml` route to get the same document as YAML.\r\n- `MapScalarApiReference` adds Scalar at `/scalar`.\r\n- `UseSwaggerUI` adds Swagger UI at `/swagger`. We point it to `/openapi/v1.json`, because Swagger UI looks for Swashbuckle's `/swagger/v1/swagger.json` by default."
     },
     {
       "file": "demo1-using-openapi/Controllers/Controllers/TalksController.cs",
       "line": 41,
-      "description": "The interesting difference with the .NET 8 controller is the `response` XML tag. It's gone!\r\n\r\nInstead, you can set the `Description` property on `ProducesResponseType`, `Produces` and `ProducesDefaultResponseType`. I built this feature in .NET 10!\r\n\r\nYou don't need to juggle your XML with your attribute, and you get intellisense for this.\r\n\r\nI highly recommend using this for all non-obvious responses, and errors!"
+      "description": "Some demo's use Minimal API's. Some use controllers. This one features controllers.\r\n\r\nThis is the endpoint which creates a talk. You can see XML comments, which helps decorate the summary, parameter and description for OpenAPI.\r\n\r\nThis endpoint is a POST, and it can do multiple things. `ProducesResponseType` tells the OpenAPI document about each of them:\r\n\r\n- It can return 200 OK with the created talk.\r\n- It can return 400 Bad Request when validation fails.\r\n- It can also return 409 Conflict if the talk title already exists.\r\n\r\n`ProducesDefaultResponseType` is quite a cool attribute. It tells the OpenAPI spec that any undocumented status code returns `Problem Details`, the standard for API error reporting.\r\n\r\nFinally, look at the response descriptions. You can set the `Description` property on `ProducesResponseType`, `Produces` and `ProducesDefaultResponseType`. I built this feature in .NET 10!\r\n\r\nYou don't need to juggle a `response` XML tag with your attribute, and you get intellisense for this.\r\n\r\nI highly recommend using this for all non-obvious responses, and errors!"
     },
     {
       "file": "demo1-using-openapi/Controllers/openapi.json",
@@ -110,7 +65,7 @@
           "character": 5
         }
       },
-      "description": "This is the OpenAPI file generated in .NET 11. It uses OpenAPI 3.2.0, the default in .NET 11. .NET 10 generates 3.1.1, and .NET 9 generates 3.0. It's very similar to the .NET 8 document, so let's not nitpick the very small changes. Instead, let's look at some relevant ones!\r\n\r\nHere you see a `servers` property. This is a list of servers this API runs on. For example, local, test and prod. In this case, it adds my localhost.\r\n\r\nScroll down to the `TalkModel` (line 315). You can see that this does not make any mistakes with nullability.\r\n\r\nOne difference I noticed is that the `int` properties aren't a simple `integer` with a `int32` format like in the .NET 8 document. They use this hybrid string/integer format with a regex (line 324)...\r\n\r\nThe reason?\r\n\r\nIn ASP.NET Core, reading numbers from JSON is set to `JsonNumberHandling.AllowReadingFromString`, which means that our server would allow both strings and int, so this is done.\r\n\r\nYou can change that to `Strict` if you want to return back to Integer. We'll see that in the next demo."
+      "description": "This is the OpenAPI file generated in .NET 11. It uses OpenAPI 3.2.0, the default in .NET 11. .NET 10 generates 3.1.1, and .NET 9 generates 3.0. Let's look at some relevant parts!\r\n\r\nHere you see a `servers` property. This is a list of servers this API runs on. For example, local, test and prod. In this case, it adds my localhost.\r\n\r\nScroll down to the `TalkModel` (line 315). You can see that this does not make any mistakes with nullability.\r\n\r\nOne difference I noticed is that the `int` properties aren't a simple `integer` with a `int32` format. They use this hybrid string/integer format with a regex (line 324)...\r\n\r\nThe reason?\r\n\r\nIn ASP.NET Core, reading numbers from JSON is set to `JsonNumberHandling.AllowReadingFromString`, which means that our server would allow both strings and int, so this is done.\r\n\r\nYou can change that to `Strict` if you want to return back to Integer. We'll see that in the next demo."
     },
     {
       "file": "demo1-using-openapi/Controllers/Program.cs",
@@ -125,7 +80,7 @@
           "character": 94
         }
       },
-      "description": "Let's go and run this demo and take a quick look at Scalar!\r\n\r\n**DO:**\r\n\r\n- Run this project.\r\n- Visit http://localhost:5301/openapi/v1.json for the OpenAPI endpoint.\r\n  - This is different compared to Swashbuckle, which uses `swagger/v1/swagger.json`\r\n- Visit http://localhost:5301/openapi/v1.yaml for the same document in YAML.\r\n- Visit http://localhost:5301/scalar/#tag/talks/GET/api/talks and show off the UI, API client code and test a request.\r\n- Visit http://localhost:5301/swagger to show that Swagger UI works, too."
+      "description": "Let's go and run this demo and take a quick look at Scalar!\r\n\r\n**DO:**\r\n\r\n- Run this project.\r\n- Visit http://localhost:5301/openapi/v1.json for the OpenAPI endpoint.\r\n- Visit http://localhost:5301/openapi/v1.yaml for the same document in YAML.\r\n- Visit http://localhost:5301/scalar/#tag/talks/GET/api/talks and show off the UI, API client code and test a request.\r\n- Visit http://localhost:5301/swagger to show that Swagger UI works, too."
     },
     {
       "file": "demo1-using-openapi/MinimalApi/TalkEndpoints.cs",

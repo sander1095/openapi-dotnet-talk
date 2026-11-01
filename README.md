@@ -2,12 +2,12 @@
 
 The demos for my talk **The best ways to use the latest OpenAPI features in .NET 11!**
 
-The demos go from Swashbuckle in .NET 8 to `Microsoft.AspNetCore.OpenApi` in .NET 11, which generates OpenAPI 3.2 documents by default. Demo 2 covers transformers and the new OpenAPI features in .NET 11: HTTP `QUERY`, hierarchical tags, `[Obsolete]` as `deprecated`, Server-Sent Events, C# unions and multiple content types per status code.
+The demos use `Microsoft.AspNetCore.OpenApi` in .NET 11, which generates OpenAPI 3.2 documents by default. An optional tour shows the Swashbuckle baseline in .NET 8. Demo 2 covers transformers and the new OpenAPI features in .NET 11: HTTP `QUERY`, hierarchical tags, `[Obsolete]` as `deprecated`, Server-Sent Events, C# unions and multiple content types per status code.
 
 ## Requirements
 
 - The .NET 11 RC3 SDK (`11.0.100-rc.3.26522.148`). [global.json](global.json) selects it and rolls forward to newer .NET 11 SDKs.
-- The ASP.NET Core 8 runtime for the `OpenApiInDotnet8` project.
+- Optional: the ASP.NET Core 8 runtime for the `OpenApiInDotnet8` project, which only the optional .NET 8 tour uses.
 - [VS Code](https://code.visualstudio.com/) with the [CodeTour](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour) extension for the guided tours.
 
 Build everything with:
@@ -36,12 +36,23 @@ The .NET 11 apps serve their OpenAPI document at `/openapi/v1.json` and Scalar a
 
 ## Tours
 
-The demos follow two CodeTours in [.tours](.tours):
+The demos follow two CodeTours in [.tours](.tours), plus an optional one for .NET 8:
 
-- **Demo 1** ([demo-1.tour](.tours/demo-1.tour)): from Swashbuckle in .NET 8 to the .NET 11 controllers, minimal API, AOT and build-time projects.
+- **Demo 1** ([demo-1.tour](.tours/demo-1.tour)): the .NET 11 controllers, minimal API, AOT and build-time projects.
 - **Demo 2** ([demo-2.tour](.tours/demo-2.tour)): transformers, hierarchical tags and the new OpenAPI 3.2 features.
+- **.NET 8 (Swashbuckle)** ([dotnet-8.tour](.tours/dotnet-8.tour)): optional, skipped in the talk. How OpenAPI worked in .NET 8, as a baseline.
 
 Open the repository in VS Code, install the recommended CodeTour extension, and start a tour from the **CodeTour** panel in the Explorer. Steps marked **DO:** are things to do live, like running an app or sending a request.
+
+## Starting the demos
+
+`./start-demos.sh` builds the solution, starts the apps the tours run live and opens their pages in the browser, in tour order. Press Ctrl+C to stop the apps.
+
+| Option         | Effect                                                                                       |
+| -------------- | -------------------------------------------------------------------------------------------- |
+| `--dotnet8`    | Also starts the .NET 8 app (5300) and opens its Swagger UI first, for the optional .NET 8 tour |
+| `--all`        | Also starts MinimalApi (5302) and AheadOfTime (5303), which the tours only show as code      |
+| `--no-browser` | Only starts the apps                                                                         |
 
 ## Backup screenshots
 
