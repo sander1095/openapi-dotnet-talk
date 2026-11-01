@@ -39,7 +39,7 @@ The .NET 11 apps serve their OpenAPI document at `/openapi/v1.json` and Scalar a
 The demos follow two CodeTours in [.tours](.tours):
 
 - **Demo 1** ([demo-1.tour](.tours/demo-1.tour)): from Swashbuckle in .NET 8 to the .NET 11 controllers, minimal API, AOT and build-time projects.
-- **Demo 2** ([demo-2.tour](.tours/demo-2.tour)): transformers, hierarchical tags and the new OpenAPI 3.2 features. The last three steps are optional.
+- **Demo 2** ([demo-2.tour](.tours/demo-2.tour)): transformers, hierarchical tags and the new OpenAPI 3.2 features.
 
 Open the repository in VS Code, install the recommended CodeTour extension, and start a tour from the **CodeTour** panel in the Explorer. Steps marked **DO:** are things to do live, like running an app or sending a request.
 

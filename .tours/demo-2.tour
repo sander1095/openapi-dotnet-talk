@@ -139,6 +139,21 @@
       "description": "Let's see this in action!\r\n\r\n**DO:**\r\n\r\n- Run this project and visit http://localhost:5306/scalar\r\n- Open `/api/talks/search` (it has a QUERY badge), click **Test Request**, set the body to `{ \"title\": \"open\" }` and send it. Scalar sends a real `QUERY` request!\r\n- Run `CustomizingOpenApi` and visit http://localhost:5305/scalar to show the `Forecasts` and `Alerts` tags nested under `Weather`, and the struck-through deprecated `/old-endpoint`.\r\n\r\nSwagger UI shows `QUERY` operations too, but hides **Try it out** for them. Add `\"query\"` to its `supportedSubmitMethods` setting (through `ConfigObject.AdditionalItems`) to enable it."
     },
     {
+      "file": "demo2-customizing-and-whats-new-in-dotnet11/WhatsNewInDotnet11/ServerSentEventsEndpoints.cs",
+      "line": 28,
+      "selection": {
+        "start": {
+          "line": 12,
+          "character": 1
+        },
+        "end": {
+          "line": 28,
+          "character": 6
+        }
+      },
+      "description": "Server-Sent Events. This endpoint returns `TypedResults.ServerSentEvents` with an `IAsyncEnumerable<SseItem<TalkModel>>`. Every `SseItem` is one event on the stream, with a `TalkModel` as its data and `talk` as its event type."
+    },
+    {
       "file": "demo2-customizing-and-whats-new-in-dotnet11/WhatsNewInDotnet11/openapi.json",
       "line": 57,
       "selection": {
@@ -151,7 +166,7 @@
           "character": 18
         }
       },
-      "description": "**Optional, skip if short on time!**\r\n\r\nServer-Sent Events. `ServerSentEventsEndpoints.cs` returns `TypedResults.ServerSentEvents` with an `IAsyncEnumerable<SseItem<TalkModel>>`.\r\n\r\nOpenAPI 3.2 describes a stream with `itemSchema`: the schema of every single event, with `data`, `event` and `id`. That's what goes over the wire. In .NET 10, the same code is described as the C# `SseItem<T>` object, with `eventType`, `eventId` and `reconnectionInterval`."
+      "description": "OpenAPI 3.2 describes a stream with `itemSchema`: the schema of every single event, with `data`, `event` and `id`. That's what goes over the wire. In .NET 10, the same code is described as the C# `SseItem<T>` object, with `eventType`, `eventId` and `reconnectionInterval`.\r\n\r\n**DO:** Try it out in Scalar!"
     },
     {
       "file": "demo2-customizing-and-whats-new-in-dotnet11/WhatsNewInDotnet11/UnionEndpoints.cs",
@@ -166,7 +181,22 @@
           "character": 43
         }
       },
-      "description": "**Optional, skip if short on time!**\r\n\r\nC# 15 has unions! A `Session` is either a `TalkModel` or a `Workshop`, and the endpoint above returns one of them.\r\n\r\nThe OpenAPI document describes `Session` with `anyOf` and both cases. The JSON is the case value itself, so there's no discriminator."
+      "description": "C# 15 has unions! A `Session` is either a `TalkModel` or a `Workshop`, and the endpoint above returns one of them."
+    },
+    {
+      "file": "demo2-customizing-and-whats-new-in-dotnet11/WhatsNewInDotnet11/openapi.json",
+      "line": 224,
+      "selection": {
+        "start": {
+          "line": 214,
+          "character": 1
+        },
+        "end": {
+          "line": 224,
+          "character": 9
+        }
+      },
+      "description": "The OpenAPI document describes `Session` with `anyOf` and both cases."
     },
     {
       "file": "demo2-customizing-and-whats-new-in-dotnet11/WhatsNewInDotnet11/ContentTypeEndpoints.cs",
@@ -181,7 +211,22 @@
           "character": 63
         }
       },
-      "description": "**Optional, skip if short on time!**\r\n\r\nOne endpoint, two content types for the same status code: JSON and CSV. Both `Produces` calls end up under a single `200` response in the OpenAPI document.\r\n\r\nThis is only metadata. The handler checks the `Accept` header itself to return CSV."
+      "description": "One endpoint, two content types for the same status code: JSON and CSV. Both `Produces` calls end up under a single `200` response in the OpenAPI document.\r\n\r\nThis is only metadata. The handler checks the `Accept` header itself to return CSV."
+    },
+    {
+      "file": "demo2-customizing-and-whats-new-in-dotnet11/WhatsNewInDotnet11/openapi.json",
+      "line": 143,
+      "selection": {
+        "start": {
+          "line": 134,
+          "character": 1
+        },
+        "end": {
+          "line": 143,
+          "character": 16
+        }
+      },
+      "description": "Both content types sit under a single `200` response: `text/csv` with a plain string and `application/json` with a `TalkModel`."
     }
   ]
 }
