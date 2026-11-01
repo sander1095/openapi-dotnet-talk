@@ -14,8 +14,6 @@ public class SpeakersController : ControllerBase
         new("Mette", "Denmark")
     ];
 
-    // Attribute arguments must be constants, and HttpMethods.Query is static readonly,
-    // so [AcceptVerbs(HttpMethods.Query)] fails with CS0182. The string works.
     [AcceptVerbs("QUERY", Route = "search", Name = "Speakers_Search")]
     public ActionResult<List<SpeakerModel>> Search(SpeakerSearch search)
     {
