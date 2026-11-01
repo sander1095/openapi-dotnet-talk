@@ -78,11 +78,6 @@
       "description": "Now that we understand how this worked in .NET 8, let's take a look at .NET 11!\r\n\r\nThis uses `Microsoft.AspNetCore.OpenApi` for creating the OpenAPI spec, and `Scalar` for rendering an UI based on the document. Scalar is newer and has cool features!\r\n\r\nSwagger UI isn't included by default, but you can still add it with `Swashbuckle.AspNetCore.SwaggerUI`. That package only contains the UI, not Swashbuckle's document generation."
     },
     {
-      "file": "demo1-using-openapi/Controllers/Controllers/TalksController.cs",
-      "line": 41,
-      "description": "The interesting difference with the .NET 8 controller is the `response` XML tag. It's gone!\r\n\r\nInstead, you can set the `Description` property on `ProducesResponseType`, `Produces` and `ProducesDefaultResponseType`. I built this feature in .NET 10!\r\n\r\nYou don't need to juggle your XML with your attribute, and you get intellisense for this.\r\n\r\nI highly recommend using this for all non-obvious responses, and errors!"
-    },
-    {
       "file": "demo1-using-openapi/Controllers/Program.cs",
       "line": 9,
       "selection": {
@@ -96,6 +91,11 @@
         }
       },
       "description": "Adding OpenAPI in .NET 11 is still very easy!\r\n\r\n- `AddOpenApi` adds the services.\r\n- `MapOpenApi` maps the document at `/openapi/v1.json`.\r\n- Call `MapOpenApi` with a `.yaml` route to get the same document as YAML.\r\n- `MapScalarApiReference` adds Scalar at `/scalar`.\r\n- `UseSwaggerUI` adds Swagger UI at `/swagger`. We point it to `/openapi/v1.json`, because Swagger UI looks for Swashbuckle's `/swagger/v1/swagger.json` by default."
+    },
+    {
+      "file": "demo1-using-openapi/Controllers/Controllers/TalksController.cs",
+      "line": 41,
+      "description": "The interesting difference with the .NET 8 controller is the `response` XML tag. It's gone!\r\n\r\nInstead, you can set the `Description` property on `ProducesResponseType`, `Produces` and `ProducesDefaultResponseType`. I built this feature in .NET 10!\r\n\r\nYou don't need to juggle your XML with your attribute, and you get intellisense for this.\r\n\r\nI highly recommend using this for all non-obvious responses, and errors!"
     },
     {
       "file": "demo1-using-openapi/Controllers/openapi.json",
