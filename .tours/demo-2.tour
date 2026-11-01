@@ -196,7 +196,7 @@
           "character": 9
         }
       },
-      "description": "The OpenAPI document describes `Session` with `anyOf` and both cases."
+      "description": "The OpenAPI document describes `Session` with `anyOf` and both cases.\r\n\r\n**DO:** Try it out in Scalar!"
     },
     {
       "file": "demo2-customizing-and-whats-new-in-dotnet11/WhatsNewInDotnet11/ContentTypeEndpoints.cs",
