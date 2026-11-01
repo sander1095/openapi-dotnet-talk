@@ -17,6 +17,7 @@ builder.Services.AddOpenApi(x =>
 });
 
 // This checks if we're currently generating an openapi spec at build-time
+// Thanks to the build environment feature in .NET 11, you can replace this with an environment check instead.
 if (Assembly.GetEntryAssembly()?.GetName().Name != "GetDocument.Insider")
 {
     // We can add services here ONLY if we're not generating an OpenAPI spec at build-time.
